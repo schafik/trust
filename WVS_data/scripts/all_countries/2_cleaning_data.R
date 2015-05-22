@@ -9,9 +9,13 @@ source("WVS_data/scripts/all_countries/0_utility_functions.R")
 
 #reading in data#
 w2 <- readRDS("WVS_data/data/in_process_data/wave_2_gathered.RDS") 
+w5 <- readRDS("WVS_data/data/in_process_data/wave_5_gathered.RDS")
+w6 <- readRDS("WVS_data/data/in_process_data/wave_6_gathered.RDS")
 
 #clarifying raw data responses#
 w2_clean <- clarify(w2)
+w5_clean <- clarify(w5)
+w6_clean <- clarify(w6)
 
 #######################################################################################
 #income crossing
@@ -23,7 +27,6 @@ crossin <- sAfrica %>% select(happy, income, country) %>%
 #get relevant variables crossed with income for every country
 
 #######################################################################################
-
 
 #TO DO: 
   #wave 2

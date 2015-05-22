@@ -149,6 +149,7 @@ clarify <- function(df) {
   df <- health_fx(df)
   df <- life_fx(df)
   df <- gTrust_fx(df)
+  df <- nTrust_fx(df)
   df <- finance_fx(df)
   df <- income_fx(df)
   df <- edu_fx(df)

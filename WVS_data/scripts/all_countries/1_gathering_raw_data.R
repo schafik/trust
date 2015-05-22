@@ -12,8 +12,6 @@ codes <- read_delim("WVS_data/data/raw_data/country_codes.csv",
                     delim = "##", col_names=F) %>% 
           select(country_code = X1, country = X3)
 
-#TO DO: clean cote d'ivoire
-
 #######################################################################################
 #Wave 2#
 #######################################################################################
