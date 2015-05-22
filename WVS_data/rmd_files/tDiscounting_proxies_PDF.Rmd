@@ -1,0 +1,231 @@
+
+---
+title: "Temporal Discounting Proxies vs. Income"
+date: May 3, 2015
+output:
+  pdf_document:
+    toc: true
+---
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(readxl)
+library(reshape2)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+source("/git_repositories/trust/WVS_data/scripts/utility_functions.R")
+```
+
+#happiness 
+`V10` - feeling of happiness
+
+  - Taking all things together, would you say you are:
+
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=11, fig.height=6.5}
+#USA
+all_respondents("USA", "happy") 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "happy", 4)
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "happy", 3)
+```
+
+#health
+`V11` - state of health (subjective)
+
+  - All in all, how would you describe your state of health these days? Would you say it is: 
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=11, fig.height=6.5}
+#USA
+all_respondents("USA", "health") + 
+  scale_x_discrete(limits=c("No answer", "Poor", "Fair", "Good", "Very good"))   
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "health", 4) +
+  scale_x_discrete(limits=c("No answer", "Poor", "Fair", "Good", "Very good"))   
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "health", 3) +
+  scale_x_discrete(limits=c("No answer", "Poor", "Fair", "Good", "Very good"))   
+```
+
+#life satisfaction
+`V23` - satisfaction with your life
+
+  - All things considered, how satisfied are you with your life as a whole these days? Using this card on which 1 means you are “completely dissatisfied” and 10 means you are “completely satisfied” where would you put your satisfaction with your life as a whole?: 
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=11, fig.height=6.5}
+#USA
+all_respondents("USA", "life") +
+  scale_x_discrete(limits=c("No answer", "Fully dissatisfied", c(2:9), "Fully satisfied")) 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "life", 4) +
+  scale_x_discrete(limits=c("No answer", "Fully dissatisfied", c(2:9), "Fully satisfied")) 
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "life", 3) +
+  scale_x_discrete(limits=c("No answer", "Fully dissatisfied", c(2:9), "Fully satisfied")) 
+```
+  
+#financial
+`V59` - satisfaction with financial situation of household
+
+  - How satisfied are you with the financial situation of your household? 
+  
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=11, fig.height=6.5}
+#USA
+all_respondents("USA", "finance") +
+  scale_x_discrete(limits=c("No answer", "Fully dissatisfied", c(2:9), "Fully satisfied")) 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "finance", 4) +
+  scale_x_discrete(limits=c("No answer", "Fully dissatisfied", c(2:9), "Fully satisfied")) 
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "finance", 3) +
+  scale_x_discrete(limits=c("No answer", "Fully dissatisfied", c(2:9), "Fully satisfied")) 
+```
+
+#education: highest level
+`V248` - highest educational level attained
+
+  - What is the highest educational level that you have attained?   
+  
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=11, fig.height=6.5}
+all_respondents("USA", "edu", coordflip = T) +
+  scale_x_discrete(limits=c(edu_labs)) 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "edu", 4) + scale_x_discrete(limits=c(edu_labs)) 
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "edu", 3) + scale_x_discrete(limits=c(edu_labs)) 
+```
+
+#education: country specific
+`V248_CS` - education (country specific)
+
+  - What is the highest educational level that you have attained?   
+  
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+#USA
+all_respondents("USA", "edu_c", coordflip = T) + scale_x_discrete(limits=c(edu_c_labs)) 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "edu_c", 4) + scale_x_discrete(limits=c(edu_c_labs)) + coord_flip()
+```
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11, fig.height=6.5}
+#USA
+by_income("USA", "edu_c", 3) + scale_x_discrete(limits=c(edu_c_labs)) + coord_flip()
+```
+
+#general trust
+`V24` - most people can be trusted
+
+  - Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people? 
+  
+  
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+all_respondents("USA", "gTrust") 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11}
+#USA
+by_income("USA", "gTrust", 4)
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11}
+#USA
+by_income("USA", "gTrust", 3)
+```
+
+#neighborhood trust
+`v103` - how much you trust: your neighborhood
+
+  - I'd like to ask you how much you trust people from various groups. Could you tell me for each whether you trust people from this group completely, somewhat, not very much or not at all? 
+  
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+#USA
+all_respondents("USA", "nTrust") + scale_x_discrete(limits=c(nTrust_labs)) 
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11}
+#USA
+by_income("USA", "nTrust", 4) + scale_x_discrete(limits=c(nTrust_labs)) 
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11}
+#USA
+by_income("USA", "nTrust", 3) + scale_x_discrete(limits=c(nTrust_labs)) 
+```
+
+#neighborhood security
+`v170` - secure in neighborhood
+
+  - Could you tell me how secure do you feel these days in your neighborhood? 
+
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+#USA
+all_respondents("USA", "security")  
+```
+
+##lowest 4
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11}
+#USA
+by_income("USA", "security", 4)
+```
+
+##lowest 3
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=11}
+#USA
+by_income("USA", "security", 3)
+```
+
+#income
+`V239` - scale of incomes
+
+```{r, echo=FALSE, warning=FALSE, warning=FALSE, fig.width=12, fig.height=7}
+#USA
+all_respondents("USA", "income", coordflip = T)  + scale_x_discrete(limits=c(income_labs)) 
+```
+
+

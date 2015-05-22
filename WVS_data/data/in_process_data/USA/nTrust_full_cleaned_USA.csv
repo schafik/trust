@@ -1,0 +1,7 @@
+"nTrust","tally","percent","lower_step","second_step","third_step","fourth_step","fifth_step","sixth_step","seventh_step","eigth_step","nineth_step","tenth_step","no_answer","country"
+"Trust completely",182,8.1,7.8,1.9,6.5,5.9,6.9,9.9,11.6,11,21.6,15.9,5,"USA"
+"Trust somewhat",1427,63.9,52.9,67.8,55.8,69.9,67,65.7,67.3,64.6,57.1,41.9,37.3,"USA"
+"Do not trust very much",465,20.8,24.2,24,27.5,20.1,16.9,20.6,19.5,21.5,19.3,23.3,21.4,"USA"
+"Do not trust at all",127,5.7,13.8,6.2,9.8,3.8,8.3,3.3,1.5,1.8,0,19,6,"USA"
+"No answer",31,1.4,1.2,0,0.3,0.4,0.9,0.5,0.1,1.2,2,0,30.3,"USA"
+"(N)",2232,100,113,126,258,317,464,393,317,134,28,20,63,"USA"

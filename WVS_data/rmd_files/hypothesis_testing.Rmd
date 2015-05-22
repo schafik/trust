@@ -1,0 +1,83 @@
+---
+title: "low-income populations and neighborhood trust"
+date: "April 30, 2015"
+output:
+  pdf_document:
+    toc: true
+---
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(readxl)
+library(reshape2)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+```
+
+#Introduction: WVS Data Variables
+The data examined is from wave 6 (the latest) of the [World Values Survey](http://www.worldvaluessurvey.org/WVSOnline.jsp), which covers the years 2010-2014. As a first pass, the analysis only looks at data for the United States.
+
+##Income 
+Income is approached subjectively on the survey. The exact wording of the question (*V239 - scale of incomes*) is as follows:
+> On this card is an income scale on which 1 indicates the lowest income group and 10 the highest income group in your country. We would like to know in what group your household is. Please, specify the appropriate number, counting all wages, salaries, pensions and other incomes that come in. 
+
+Our analysis treats low income individuals as those who placed themselves in the first four brackets.
+
+##Temporal Discounting 
+We focus on low-income people and intertemporal choice i.e. relationship between low-income groups and temporal discounting via proxies. These include:
+      
+      - happiness
+      - health
+      - life satisfaction
+      - financial satisfaction
+      - education
+
+##Generalized Trust
+The next part will explore low-income groups and their levels of general trust. We expect that:
+      
+##Neighborhood Trust 
+  
+      - higher neighborhood trust can substitute other low trust
+      - this could be the protecting mechanism! i.e. what we care about    
+      
+#Hypotheses
+
+##hypothesis 1
+*Low-income individuals are more likely to discount the future more heavily (i.e. display myopia) in comparison to high-income individuals.*
+
+##hypothesis 1a
+*Low-income individuals are more likely to have lower levels of generalized trust than high-income individuals.*
+
+##hypothesis 2
+*There are no differences in levels of neighborhood trust in low and high-income individuals.*
+
+##hypothesis 3
+*Low-income individuals with higher levels of neighborhood trust will be more likely to discount the future less heavily than low-income individuals with lower levels of neighborhood trust.*
+
+#Hypothesis Testing: 1
+*low-income groups discount future more*
+
+#Hypothesis Testing: 1a
+*low-income groups have lower levels of generalized trust*
+
+#Hypothesis Testing : 1b
+#lower levels of generalized trust partially mediate relationship between low income groups and higher temporal discounting
+
+#Hypothesis Testing: 2
+*neighborhood trust does not differ low vs. high-income* 
+
+#Hypothesis Testing: 3
+*neighborhood trust can “substitute” low generalized trust – those low-income individuals with low generalized trust but high neighborhood trust do not show same effects on temporal discounting
+
+
+#other steps
+
+##lab data showing relationship between trust + present bias
+> Then we show our lab data - both correlational and experimental - that shows the link between low/high income, low/high neighborhood trust and temporal discounting.
+
+##neighborhood trust and stress 
+> Elke suggested we *may* want to run a third study, where we look at the link between neighborhood trust and stress, for example by measuring cortisol levels in our Brooklyn sample... but that might be hard to do. I have to look at the stress literature in order to get better insights on that.
+
+
+
+
