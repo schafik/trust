@@ -18,8 +18,9 @@ the following is a list of TO DOs:
 check out last script in pipeline for data.
   
 ###c) ensure that we have data divided by:
-      - continent 
-      - ~~low vs high income~~
+
+  - continent 
+  - ~~low vs high income~~
 
 ##2) analysis
 developing a factor variable for TEMPORAL DISCOUNTING
