@@ -1,6 +1,6 @@
 
 ###############################################################
-#Cleaning Data and Crossing With Income#
+#Clean/Merge Data and labeling by income#
 ###############################################################
 
 #necessary packages and functions#
@@ -17,31 +17,35 @@ w2_clean <- clarify(w2)
 w5_clean <- clarify(w5)
 w6_clean <- clarify(w6)
 
-#######################################################################################
-#income crossing
-sAfrica <- filter(yo, country == "South Africa")
-crossin <- sAfrica %>% select(happy, income, country) %>%
-            mutate(low_income = ifelse(income %in% c(1:3), T, F)) %>%            
-            group_by(low_income, happy) %>% summarize(happy_income = n()) 
-              
-#get relevant variables crossed with income for every country
+  #writing out data#
+  saveRDS(w2_clean, "WVS_data/data/in_process_data/wave_2_cleaned.RDS")
+    write_csv(w2_clean, "WVS_data/data/in_process_data/wave_2_cleaned.csv")
+  saveRDS(w5_clean, "WVS_data/data/in_process_data/wave_5_cleaned.RDS")
+    write_csv(w5_clean, "WVS_data/data/in_process_data/wave_5_cleaned.csv")
+  saveRDS(w6_clean, "WVS_data/data/in_process_data/wave_6_cleaned.RDS")
+    write_csv(w6_clean, "WVS_data/data/in_process_data/wave_6_cleaned.csv")
+  
+#merging together into one data set#
+full_data <- rbind(w2_clean, w5_clean)
+full_data <- rbind(full_data, select(w6_clean, -security))
+    remove(w2, w2_clean, w5, w5_clean, w6, w6_clean) #emptying workspace a bit
 
-#######################################################################################
+#dividing by income#
+full_data <- full_data %>%
+              mutate(lowIncome_4 = ifelse(income %in% c(1:4), T, F),
+                     lowIncome_3 = ifelse(income %in% c(1:3), T, F),
+                     lowIncome_2 = ifelse(income %in% c(1:2), T, F))
 
+#writing out data#
+  saveRDS(full_data, "WVS_data/data/in_process_data/fulldata_cleaned.RDS")
+    write_csv(full_data, "WVS_data/data/in_process_data/fulldata_cleaned.csv")
+
+  
 #TO DO: 
-  #wave 2
-    #get relevant variables crossed with income for every country
-  #wave 5
-    #get relevant variables for every country
-    #get relevant variables crossed with income for every country
-  #wave 6
-    #get relevant variables for every country
-    #get relevant variables crossed with income for every country
-  #continent variable!
-    #create csv that maps to country csv for continent 
-  #3 waves => we want to have an average score for each variable and collapse into one data set
+#continent variable!
+  #create csv that maps to country csv for continent 
 
-  #ensure that we have data divided by:
-    #continent 
-    #low vs high income
+#ensure that we have data divided by:
+  #continent 
+
 
