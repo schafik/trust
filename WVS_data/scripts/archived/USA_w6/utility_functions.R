@@ -1,5 +1,7 @@
 
 
+#TODO: outdated file paths#
+
 #for reading in data###########################################################################
 read_WVS <- function(country, variable) {
   df <- read_csv(paste0("/git_repositories/trust/WVS_data/data/in_process_data/", #read in data
