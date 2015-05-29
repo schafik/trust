@@ -144,7 +144,7 @@ edu_fx <- function(df) {
 }
 
 
-clarify <- function(df) {
+clarify <- function(df) {     #helper function that brings the above together
   df <- happy_fx(df)
   df <- health_fx(df)
   df <- life_fx(df)
