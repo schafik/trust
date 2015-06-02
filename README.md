@@ -19,7 +19,7 @@ check out last script in pipeline for data.
   
 ###c) ensure that we have data divided by:
 
-  - continent 
+  - ~~continent~~
   - ~~low vs high income~~
 
 ##2) analysis
