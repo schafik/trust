@@ -48,4 +48,12 @@ full_data <- full_data %>%
 #ensure that we have data divided by:
   #continent 
 
-
+###############################################################
+# Merge the continent
+###############################################################
+    country_list_UN <- read_csv("WVS_data/data/raw_data/country_list_UN.csv")
+    merged <- left_join(codes, country_list_UN, by = c("country" = "Name"))
+    # merged <- merge(codes, country_list_UN, by.x="country", by.y="Name", all.x=T)
+    codes2 <- merged[c("country", "country_code","Continent", "Region")] #TO DO: write out file so we can save
+    
+    
