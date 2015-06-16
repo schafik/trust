@@ -1,5 +1,7 @@
 #MCA
 require(FactoMineR)
+require(dplyr)
+
 full_data <- readRDS("WVS_data/data/in_process_data/fulldata_cleaned.RDS")
 
 names(full_data)

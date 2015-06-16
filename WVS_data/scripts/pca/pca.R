@@ -1,4 +1,11 @@
 # attempting pca with WVS data
+require('dplyr')
+library(readr)
+
+codes <- read_delim("WVS_data/data/raw_data/country_codes.csv", 
+                    delim = "##", col_names=F) %>% 
+    select(country_code = X1, country = X3)
+
 
 w2 <- readRDS("WVS_data/data/raw_data/wave2_raw.RDS") %>%
         select(wave = V1, country_code = V2, happy = V18,
@@ -44,34 +51,41 @@ normalize <- function(input_vec) {
     scale(input_vec, scale = T, center = T)
 }
 
-hist(wvs_data_norm$edu)
 
-wvs_data_norm <- wvs_data %>% mutate(happy = normalize(happy),
-                                health = normalize(health),
-                                life = normalize(life),
-                                gTrust = normalize(gTrust),
-                                finance = normalize(finance),
-                                nTrust = normalize(nTrust),
-                                income = normalize(income),
-                                edu = normalize(edu),
-                                edu_c = normalize(edu_c))
+# wvs_data_norm <- wvs_data %>% mutate(happy = normalize(happy),
+#                                 health = normalize(health),
+#                                 life = normalize(life),
+#                                 gTrust = normalize(gTrust),
+#                                 finance = normalize(finance),
+#                                 nTrust = normalize(nTrust),
+#                                 income = normalize(income),
+#                                 edu = normalize(edu),
+#                                 edu_c = normalize(edu_c))
 
-pca_df <- wvs_data_norm %>% select(-edu_c, -wave, -country)
+hist(wvs_data$edu)
+pca_df <- wvs_data %>% select(-edu_c, -wave, -country, -nTrust, -gTrust)
 
 summary(pca_df)
 
-pca_mod <- prcomp(~ ., data=pca_df, na.action=na.omit, scale=TRUE)
+pca_mod <- prcomp(~ ., data=pca_df, na.action=na.omit, scale=TRUE, center=TRUE)
 pca_mod
-plot(pca_mod, type="l")
 summary(pca_mod)
+plot(pca_mod, type="l")
 #loadings(pca_mod)
 pca_mod$rotation
-pca_mod$rotation[,"PC1"]
+test <- pca_mod$rotation[,"PC1"]
 
+#getting 1st prcomp
+pc1 <- pca_mod$x[,1]
 
 biplot(pca_mod)
 
 
+names(pc1)
+pca_val_data <- wvs_data %>% 
+                    filter(row.names(wvs_data) %in% names(pc1)) %>%
+                    select(wave, nTrust) %>%
+                    mutate(pc1 = pc1)
 
-
-
+fit <- lm(pc1~nTrust, data = pca_val_data)
+summary(fit)
