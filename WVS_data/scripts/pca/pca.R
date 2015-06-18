@@ -30,12 +30,37 @@ w6 <- readRDS("WVS_data/data/raw_data/wave6_raw.RDS") %>%
                    income = V239, edu = V248, edu_c = V248_CS)
 w6 <- left_join(w6, codes, by="country_code") %>% select(-country_code, -security)
 
+
+
+# re-order
 NA_recode <- function(input_vec) {
     ifelse(input_vec %in% c(-1, -3, -4, -2, -5), NA, input_vec)
 }
 
 
 wvs_data <- rbind_list(w2, w5, w6)    
+
+wvs_data <- wvs_data %>% mutate(health =
+                                    ifelse(health == 1, 5, 
+                                    ifelse(health == 2, 4, 
+                                    ifelse(health == 3, 3, 
+                                    ifelse(health == 4, 2,
+                                    ifelse(health == 5, 1, health))))),
+                                happy =
+                                    ifelse(happy == 1, 4, 
+                                    ifelse(happy == 2, 3, 
+                                    ifelse(happy == 3, 2, 
+                                    ifelse(happy == 4, 1, happy)))),
+                                nTrust =
+                                    ifelse(nTrust == 1, 4, 
+                                    ifelse(nTrust == 2, 3, 
+                                    ifelse(nTrust == 3, 2, 
+                                    ifelse(nTrust == 4, 1, nTrust)))) 
+                                )
+
+
+
+
 
 wvs_data <- wvs_data %>% mutate(happy = NA_recode(happy),
                                 health = NA_recode(health),
@@ -78,10 +103,9 @@ test <- pca_mod$rotation[,"PC1"]
 #getting 1st prcomp
 pc1 <- pca_mod$x[,1]
 
-biplot(pca_mod)
+# biplot(pca_mod)
 
 
-names(pc1)
 pca_val_data <- wvs_data %>% 
                     filter(row.names(wvs_data) %in% names(pc1)) %>%
                     select(wave, nTrust) %>%
