@@ -52,10 +52,11 @@ wvs_data <- wvs_data %>% mutate(health =
                                     ifelse(happy == 3, 2, 
                                     ifelse(happy == 4, 1, happy)))),
                                 nTrust =
-                                    ifelse(nTrust == 1, 4, 
-                                    ifelse(nTrust == 2, 3, 
-                                    ifelse(nTrust == 3, 2, 
-                                    ifelse(nTrust == 4, 1, nTrust)))) 
+                                    ifelse(nTrust == 1, 5, 
+                                    ifelse(nTrust == 2, 4, 
+                                    ifelse(nTrust == 3, 3, 
+                                    ifelse(nTrust == 4, 2,
+                                    ifelse(nTrust == 5, 1, nTrust)))))
                                 )
 
 
@@ -113,3 +114,11 @@ pca_val_data <- wvs_data %>%
 
 fit <- lm(pc1~nTrust, data = pca_val_data)
 summary(fit)
+# plot(fit)
+
+boxplot(pc1~nTrust, data=pca_val_data)
+
+
+require(ggplot2)
+# calculate group mean
+pca_val_data %>% group_by(nTrust) %>% summarise(gmean = mean(pc1, na.rm = T))
