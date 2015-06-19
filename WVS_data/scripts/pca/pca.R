@@ -108,8 +108,16 @@ pc1 <- pca_mod$x[,1]
 
 pca_val_data <- wvs_data %>% 
                     filter(row.names(wvs_data) %in% names(pc1)) %>%
-                    select(wave, nTrust) %>%
+                    select(wave, nTrust, gTrust) %>%
                     mutate(pc1 = pc1)
 
-fit <- lm(pc1~nTrust, data = pca_val_data)
-summary(fit)
+#neighborhood trust
+fit1 <- lm(pc1~nTrust, data = pca_val_data)
+summary(fit1)
+
+#neighborhood trust controlling for 
+fit2 <- lm(pc1~nTrust, data = pca_val_data)
+summary(fit2)
+
+
+
