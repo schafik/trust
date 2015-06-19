@@ -112,7 +112,6 @@ pca_val_data <- wvs_data %>%
                     select(wave, nTrust, gTrust) %>%
                     mutate(pc1 = pc1)
 
-<<<<<<< HEAD
 #neighborhood trust
 fit1 <- lm(pc1~nTrust, data = pca_val_data)
 summary(fit1)
