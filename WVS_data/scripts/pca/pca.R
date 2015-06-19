@@ -52,10 +52,11 @@ wvs_data <- wvs_data %>% mutate(health =
                                     ifelse(happy == 3, 2, 
                                     ifelse(happy == 4, 1, happy)))),
                                 nTrust =
-                                    ifelse(nTrust == 1, 4, 
-                                    ifelse(nTrust == 2, 3, 
-                                    ifelse(nTrust == 3, 2, 
-                                    ifelse(nTrust == 4, 1, nTrust)))) 
+                                    ifelse(nTrust == 1, 5, 
+                                    ifelse(nTrust == 2, 4, 
+                                    ifelse(nTrust == 3, 3, 
+                                    ifelse(nTrust == 4, 2,
+                                    ifelse(nTrust == 5, 1, nTrust)))))
                                 )
 
 
@@ -111,6 +112,7 @@ pca_val_data <- wvs_data %>%
                     select(wave, nTrust, gTrust) %>%
                     mutate(pc1 = pc1)
 
+<<<<<<< HEAD
 #neighborhood trust
 fit1 <- lm(pc1~nTrust, data = pca_val_data)
 summary(fit1)
@@ -119,5 +121,9 @@ summary(fit1)
 fit2 <- lm(pc1~nTrust, data = pca_val_data)
 summary(fit2)
 
+boxplot(pc1~nTrust, data=pca_val_data)
 
+require(ggplot2)
+# calculate group mean
+pca_val_data %>% group_by(nTrust) %>% summarise(gmean = mean(pc1, na.rm = T))
 
