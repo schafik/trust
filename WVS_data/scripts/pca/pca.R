@@ -1,6 +1,7 @@
 # attempting pca with WVS data
 require('dplyr')
 library(readr)
+require(ggplot2)
 
 codes <- read_delim("WVS_data/data/raw_data/country_codes.csv", 
                     delim = "##", col_names=F) %>% 
@@ -56,11 +57,11 @@ wvs_data <- wvs_data %>% mutate(health =
                                     ifelse(nTrust == 2, 4, 
                                     ifelse(nTrust == 3, 3, 
                                     ifelse(nTrust == 4, 2,
-                                    ifelse(nTrust == 5, 1, nTrust)))))
+                                    ifelse(nTrust == 5, 1, nTrust))))),
+                                gTrust = 
+                                    ifelse(gTrust == 1, "most people can be trusted",
+                                    ifelse(gTrust == 2, "need to be very careful", gTrust))
                                 )
-
-
-
 
 
 wvs_data <- wvs_data %>% mutate(happy = NA_recode(happy),
@@ -106,23 +107,27 @@ pc1 <- pca_mod$x[,1]
 
 # biplot(pca_mod)
 
-
 pca_val_data <- wvs_data %>% 
                     filter(row.names(wvs_data) %in% names(pc1)) %>%
                     select(wave, nTrust, gTrust) %>%
-                    mutate(pc1 = pc1)
+                    mutate(pc1 = pc1,
+                           gTrust = factor(gTrust))
 
 #neighborhood trust
-fit1 <- lm(pc1~nTrust, data = pca_val_data)
+fit1 <- lm(pc1 ~ nTrust, data = pca_val_data)
 summary(fit1)
 
-#neighborhood trust controlling for 
-fit2 <- lm(pc1~nTrust, data = pca_val_data)
+#neighborhood trust controlling for general trust (additave model... IVs very different)
+fit2 <- lm(pc1 ~ nTrust + gTrust, data = pca_val_data)
 summary(fit2)
 
-boxplot(pc1~nTrust, data=pca_val_data)
 
-require(ggplot2)
-# calculate group mean
+#neighborhood trust controlling for general trust (interactions between IVs)
+fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_data)
+summary(fit3)
+
+#boxplot(pc1~nTrust, data=pca_val_data)
+
+# calculate group mean for neighborhood trust
 pca_val_data %>% group_by(nTrust) %>% summarise(gmean = mean(pc1, na.rm = T))
 
