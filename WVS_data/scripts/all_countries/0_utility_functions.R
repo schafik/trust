@@ -52,7 +52,7 @@ happy_fx <- function(df) {
       happy = factor(as.character(happy), levels = 
         c("Very happy", "Rather happy", "Not very happy", "Not at all happy")))
 }
-
+# 
 life_fx <- function(df) {
   df <- df %>% mutate(life =
             ifelse(life == 1, "Completely dissatisfied", 
@@ -76,7 +76,7 @@ gTrust_fx <- function(df) {
     gTrust = factor(as.character(gTrust), levels = 
         c("Most people can be trusted", "Need to be very careful")))
 }
-
+# 
 finance_fx <- function(df) {
   df <- df %>% mutate(finance =
             ifelse(finance == 1, "Completely dissatisfied", 
@@ -120,7 +120,7 @@ income_fx <- function(df) {
     income = factor(as.character(income), levels = 
       c(paste0(1:10))))
 }
-
+# 
 edu_fx <- function(df) {
   df <- df %>% mutate(edu =
             ifelse(edu == 1, "No formal education", 

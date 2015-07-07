@@ -1,5 +1,5 @@
 # attempting pca with WVS data
-require('dplyr')
+library(dplyr)
 library(readr)
 require(ggplot2)
 
@@ -12,7 +12,7 @@ w2 <- readRDS("WVS_data/data/raw_data/wave2_raw.RDS") %>%
         select(wave = V1, country_code = V2, happy = V18,
                  health = V83, life = V96, gTrust = V94, 
                  finance = V132, nTrust = V347_32, income = V363, 
-                 edu = V375, edu_c = V375CS) 
+                 edu = V375) 
 w2 <- left_join(w2, codes, by="country_code") %>% select(-country_code)
       
 
@@ -20,7 +20,7 @@ w5 <- readRDS("WVS_data/data/raw_data/wave5_raw.RDS") %>%
         select(wave = V1, country_code = V2, happy = V10,
                  health = V11, life = V22, gTrust = V23, 
                  finance = V68, nTrust = V126, 
-                 income = V253, edu = V238, edu_c = V238CS) 
+                 income = V253, edu = V238) 
 w5 <- left_join(w5, codes, by="country_code") %>% select(-country_code)
 
 
@@ -28,19 +28,26 @@ w6 <- readRDS("WVS_data/data/raw_data/wave6_raw.RDS") %>%
             select(wave = V1, country_code = V2, happy = V10,
                    health = V11, life = V23, gTrust = V24, 
                    finance = V59, nTrust = V103, security = V170, 
-                   income = V239, edu = V248, edu_c = V248_CS)
+                   income = V239, edu = V248)
 w6 <- left_join(w6, codes, by="country_code") %>% select(-country_code, -security)
 
-
-
-# re-order
+# get NA values correct
 NA_recode <- function(input_vec) {
     ifelse(input_vec %in% c(-1, -3, -4, -2, -5), NA, input_vec)
 }
 
+wvs_data <- rbind_list(w2, w5, w6); remove(w2, w5, w6, codes)    
 
-wvs_data <- rbind_list(w2, w5, w6)    
+wvs_data <- wvs_data %>% mutate(happy = NA_recode(happy),
+                                health = NA_recode(health),
+                                life = NA_recode(life),
+                                gTrust = NA_recode(gTrust),
+                                finance = NA_recode(finance),
+                                nTrust = NA_recode(nTrust),
+                                income = NA_recode(income),
+                                edu = NA_recode(edu))
 
+#recoding variables to make sense (higher # = better)
 wvs_data <- wvs_data %>% mutate(health =
                                     ifelse(health == 1, 5, 
                                     ifelse(health == 2, 4, 
@@ -60,23 +67,13 @@ wvs_data <- wvs_data %>% mutate(health =
                                     ifelse(nTrust == 5, 1, nTrust))))),
                                 gTrust = 
                                     ifelse(gTrust == 1, "most people can be trusted",
-                                    ifelse(gTrust == 2, "need to be very careful", gTrust))
-                                )
+                                    ifelse(gTrust == 2, "need to be very careful", gTrust)))
 
 
-wvs_data <- wvs_data %>% mutate(happy = NA_recode(happy),
-                                health = NA_recode(health),
-                                life = NA_recode(life),
-                                gTrust = NA_recode(gTrust),
-                                finance = NA_recode(finance),
-                                nTrust = NA_recode(nTrust),
-                                income = NA_recode(income),
-                                edu = NA_recode(edu),
-                                edu_c = NA_recode(edu_c))
 # data prep done, PCA
-normalize <- function(input_vec) {
-    scale(input_vec, scale = T, center = T)
-}
+# normalize <- function(input_vec) {
+#     scale(input_vec, scale = T, center = T)
+# }
 
 
 # wvs_data_norm <- wvs_data %>% mutate(happy = normalize(happy),
@@ -86,11 +83,10 @@ normalize <- function(input_vec) {
 #                                 finance = normalize(finance),
 #                                 nTrust = normalize(nTrust),
 #                                 income = normalize(income),
-#                                 edu = normalize(edu),
-#                                 edu_c = normalize(edu_c))
+#                                 edu = normalize(edu))
 
 hist(wvs_data$edu)
-pca_df <- wvs_data %>% select(-edu_c, -wave, -country, -nTrust, -gTrust)
+pca_df <- wvs_data %>% select(-wave, -country, -nTrust, -gTrust)
 
 summary(pca_df)
 
@@ -100,7 +96,7 @@ summary(pca_mod)
 plot(pca_mod, type="l")
 #loadings(pca_mod)
 pca_mod$rotation
-test <- pca_mod$rotation[,"PC1"]
+# test <- pca_mod$rotation[,"PC1"]
 
 #getting 1st prcomp
 pc1 <- pca_mod$x[,1]
