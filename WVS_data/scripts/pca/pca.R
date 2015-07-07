@@ -125,9 +125,14 @@ summary(fit2)
 #neighborhood trust controlling for general trust (interactions between IVs)
 fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_data)
 summary(fit3)
+ntrust_subEffect <- effect("nTrust*gTrust", fit3)
+summary(ntrust_subEffect)
+plot(ntrust_subEffect, multiline=TRUE, rug=FALSE)
 
 #boxplot(pc1~nTrust, data=pca_val_data)
 
 # calculate group mean for neighborhood trust
-pca_val_data %>% group_by(nTrust) %>% summarise(gmean = mean(pc1, na.rm = T))
+pca_val_data %>% group_by(nTrust, gTrust) %>% summarise(discounting_factor = mean(pc1, na.rm = T))
+
+
 
