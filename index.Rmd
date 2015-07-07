@@ -1,0 +1,13 @@
+---
+title: "Neighborhood Trust"
+output: 
+  html_document:
+    toc: no
+    number_sections: no
+    theme: spacelab
+    self_contained: no
+---
+
+### WVS Survey data
+
+ * [findings](http://schafik.github.io/trust/findings.html)
