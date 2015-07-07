@@ -22,11 +22,11 @@ check out last script in pipeline for data.
   - ~~continent~~
   - ~~low vs high income~~
 
-##2) analysis
-developing a factor variable for TEMPORAL DISCOUNTING
+##2) ~~analysis~~
+~~developing a factor variable for TEMPORAL DISCOUNTING~~
 
-##3) hypthesis testing
-analysis using the factor variable from step 2
+~~##3) hypthesis testing~~
+~~analysis using the factor variable from step 2~~
 
 ##4) robustness checks
 heteroskadascity etc. 
