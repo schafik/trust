@@ -17,10 +17,10 @@ pca_val_dataNOINCOME <- read_csv("/git_repositories/trust/WVS_data/data/pca/pca_
 ```
 
 #Hypothesis 1: poor people more myopic
-...in comparison to high-income individuals. *indeed* found to be the case:
+...in comparison to high-income individuals. **indeed** found to be the case:
 
 ##poor = (≤ 4)
-```{r}
+```{r, echo=FALSE}
 hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
           mutate(low_income = ifelse(income <=4, T, F)) %>%
           group_by(low_income) %>% 
@@ -30,7 +30,7 @@ hyp1
 
 ##other definitions of poor
 ###poor = (≤ 3)
-```{r}
+```{r, echo=FALSE}
 hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
           mutate(low_income = ifelse(income <=3, T, F)) %>%
           group_by(low_income) %>% 
@@ -39,7 +39,7 @@ hyp1
 ```
 
 ###poor = (≤ 2)
-```{r}
+```{r, echo=FALSE}
 hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
           mutate(low_income = ifelse(income <=2, T, F)) %>%
           group_by(low_income) %>% 
@@ -48,7 +48,7 @@ hyp1
 ```
 
 ###poor = (≤ 1)
-```{r}
+```{r, echo=FALSE}
 hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
           mutate(low_income = ifelse(income <=1, T, F)) %>%
           group_by(low_income) %>% 
@@ -56,9 +56,12 @@ hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
 hyp1
 ```
 
+\
+[back to table of contents](#TOC)
+
 #Hypothesis 1a: poor people less general trust
 
-*indeed* in every definition of low income, there are as a percent within each group, less poor people that have general trust when compared to middle/high income individuals
+**indeed** in every definition of low income, there are as a percent within each group, less poor people that have general trust when compared to middle/high income individuals
 
 ##poor = (≤ 4)
 ```{r, echo=FALSE}
@@ -77,6 +80,8 @@ ggplot(data=general, aes(x=gTrust, y=percent , fill = low_income)) +
 ```
 
 ##other definitions of poor
+on the 1-10 income scale, we define poor as those that selected 3 or less etc...
+
 ###poor = (≤ 3)
 ```{r, echo=FALSE}
 general <- wvs_data %>% filter(!is.na(gTrust), !is.na(income)) %>%
@@ -122,9 +127,12 @@ general %>% select(-c(nums:total)) %>% arrange(desc(low_income))
 #   theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + xlab("")
 ```
 
+\
+[back to table of contents](#TOC)
+
 #Hypothesis 1b: less general trust = more mypoia 
 
-*indeed* less general trust means more discounting
+**indeed** less general trust means more discounting
 
 ```{r, eval=FALSE}
 # fit1 <- glm(as.factor(gTrust) ~ pc1, data = pca_val_dataNOINCOME, family = binomial())
@@ -133,11 +141,14 @@ pca_val_dataNOINCOME %>% group_by(gTrust) %>%
   summarise(discounting_factor = mean(pc1, na.rm = T)) 
 ```
 
+\
+[back to table of contents](#TOC)
+
 #Hypothesis 1 Summary:
 
-  + middle/high income people are *less mypoic* than low income people
-  + middle/high income people *with general trust even less mypoic* than counterparts with no general trust
-  + low income people are *even more mypoic with no general trust*
+  + middle/high income people are **less mypoic** than low income people
+  + middle/high income people **with general trust even less mypoic** than counterparts with no general trust
+  + low income people are **even more mypoic with no general trust**
 
 ##poor = (≤ 4)
 ```{r, echo=FALSE}
@@ -151,8 +162,6 @@ ggplot(data=hyp_1, aes(x=gTrust, y=discounting_factor, colour=low_income, group=
     geom_line() + geom_point() + xlab("") +
     theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + 
     ggtitle("Average Discounting Factor by Group:\nGeneral Trust & Income")
-
-
 ```
   
 ##other definitions of poor
@@ -201,7 +210,7 @@ hyp_1
 
 #Hypothesis 2: neighborhood trust not different 
 
-*indeed* there is no significant variation across neighborhood trust:
+**indeed** there is no significant variation across income level for neighborhood trust:
 ```{r, echo=FALSE, fig.width=14}
 hood <- wvs_data %>% filter(!is.na(nTrust), !is.na(income)) %>%
         select(nTrust, income) 
@@ -214,22 +223,27 @@ ggplot(data=hood, aes(x=income, fill=nTrust)) +
 \
 [back to table of contents](#TOC)
 
-
 #Hypothesis 3: poor people with neighborhood trust less myopic 
 
 ###including income for calculation of TD proxy
 ```{r, echo=FALSE}
 #neighborhood trust
 fit1 <- lm(pc1 ~ nTrust, data = pca_val_data)
-summary(fit1)
+# summary(fit1)
 
 #neighborhood trust controlling for general trust (additave model... IVs very different)
 fit2 <- lm(pc1 ~ nTrust + gTrust, data = pca_val_data)
-summary(fit2)
+# summary(fit2)
 
 #neighborhood trust controlling for general trust (interactions between IVs)
 fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_data)
-summary(fit3)
+# summary(fit3)
+```
+
+```{r, eval=FALSE}
+(1) <- lm(pc1 ~ nTrust)
+(2) <- lm(pc1 ~ nTrust + gTrust)
+(3) <- lm(pc1 ~ nTrust * gTrust)
 ```
 
 ```{r, results='asis', echo=FALSE}
@@ -251,9 +265,21 @@ fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_dataNOINCOME)
 # summary(fit3)
 ```
 
+```{r, eval=FALSE}
+(1) <- lm(pc1 ~ nTrust)
+(2) <- lm(pc1 ~ nTrust + gTrust)
+(3) <- lm(pc1 ~ nTrust * gTrust)
+```
+
+```{r, results='asis', echo=FALSE}
+stargazer(fit1, fit2, fit3, title="Regression Results NOT Including Income", align=TRUE, type="html")
+```
+
+\
+[back to table of contents](#TOC)
 
 ##means of TD proxy
-broken down by neighborhood trust and general trust
+broken down by neighborhood trust and general trust. **indeed** the case that effect of low general trust on temporal discounting is buffered by increasing neighborhood trust!! 
 
 ###including income for calculation of TD proxy
 ```{r, echo=FALSE}
