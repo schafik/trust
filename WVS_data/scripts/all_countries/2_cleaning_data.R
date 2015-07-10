@@ -30,30 +30,23 @@ full_data <- rbind(w2_clean, w5_clean)
 full_data <- rbind(full_data, select(w6_clean, -security))
     remove(w2, w2_clean, w5, w5_clean, w6, w6_clean) #emptying workspace a bit
 
-#dividing by income#
+#doing some cleaning on income#
 full_data <- full_data %>%
-              mutate(lowIncome_4 = ifelse(income %in% c(1:4), T, F),
-                     lowIncome_3 = ifelse(income %in% c(1:3), T, F),
-                     lowIncome_2 = ifelse(income %in% c(1:2), T, F))
+              mutate(income = as.numeric(as.character(income)),
+                     lowIncome_4 = ifelse(income <= 4, T, F),
+                     lowIncome_3 = ifelse(income <= 3, T, F),
+                     lowIncome_2 = ifelse(income <= 2, T, F),
+                     lowIncome_1 = ifelse(income <= 1, T, F))
 
-#writing out data#
+#Merge the continent##########################################################
+country_list_UN <- read_csv("WVS_data/data/raw_data/country_list_UN.csv") %>%
+            select(country_code = Countrycode_UN, continent = Continent, region = Region)
+
+full_data <- left_join(full_data, country_list_UN, by = "country_code") %>% 
+              select(-country_code) %>%
+              select(wave, country, continent:region, happy:lowIncome_1)
+
+#writing out data#############################################################
   saveRDS(full_data, "WVS_data/data/in_process_data/fulldata_cleaned.RDS")
     write_csv(full_data, "WVS_data/data/in_process_data/fulldata_cleaned.csv")
-
   
-#TO DO: 
-#continent variable!
-  #create csv that maps to country csv for continent 
-
-#ensure that we have data divided by:
-  #continent 
-
-###############################################################
-# Merge the continent
-###############################################################
-    country_list_UN <- read_csv("WVS_data/data/raw_data/country_list_UN.csv")
-    merged <- left_join(codes, country_list_UN, by = c("country" = "Name"))
-    # merged <- merge(codes, country_list_UN, by.x="country", by.y="Name", all.x=T)
-    codes2 <- merged[c("country", "country_code","Continent", "Region")] #TO DO: write out file so we can save
-    
-    

@@ -3,10 +3,7 @@ library(dplyr)
 library(readr)
 require(ggplot2)
 
-codes <- read_delim("WVS_data/data/raw_data/country_codes.csv", 
-                    delim = "##", col_names=F) %>% 
-    select(country_code = X1, country = X3)
-
+codes <- read_csv("WVS_data/data/raw_data/country_codes_continents.csv")
 
 w2 <- readRDS("WVS_data/data/raw_data/wave2_raw.RDS") %>%
         select(wave = V1, country_code = V2, happy = V18,
@@ -86,7 +83,8 @@ wvs_data <- wvs_data %>% mutate(health =
 #                                 edu = normalize(edu))
 
 hist(wvs_data$edu)
-pca_df <- wvs_data %>% select(-wave, -country, -nTrust, -gTrust)
+pca_df <- wvs_data %>% select(-wave, -country, -continent, -income,
+                              -region, -nTrust, -gTrust)
 
 summary(pca_df)
 
@@ -105,30 +103,10 @@ pc1 <- pca_mod$x[,1]
 
 pca_val_data <- wvs_data %>% 
                     filter(row.names(wvs_data) %in% names(pc1)) %>%
-                    select(wave, nTrust, gTrust) %>%
-                    mutate(pc1 = pc1,
-                           gTrust = factor(gTrust))
+                    select(wave, nTrust, gTrust, income) %>%
+                    mutate(pc1 = pc1, gTrust = factor(gTrust)) %>%
+                    filter(!is.na(nTrust), !is.na(gTrust))
 
-#neighborhood trust
-fit1 <- lm(pc1 ~ nTrust, data = pca_val_data)
-summary(fit1)
-
-#neighborhood trust controlling for general trust (additave model... IVs very different)
-fit2 <- lm(pc1 ~ nTrust + gTrust, data = pca_val_data)
-summary(fit2)
-
-
-#neighborhood trust controlling for general trust (interactions between IVs)
-fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_data)
-summary(fit3)
-ntrust_subEffect <- effect("nTrust*gTrust", fit3)
-summary(ntrust_subEffect)
-plot(ntrust_subEffect, multiline=TRUE, rug=FALSE)
-
-#boxplot(pc1~nTrust, data=pca_val_data)
-
-# calculate group mean for neighborhood trust
-pca_val_data %>% group_by(nTrust, gTrust) %>% summarise(discounting_factor = mean(pc1, na.rm = T))
-
-
-
+#write out
+write_csv(pca_val_data, "WVS_data/data/pca/pca_NOincome.csv")
+#write_csv(pca_val_data, "WVS_data/data/pca/pca_income.csv")

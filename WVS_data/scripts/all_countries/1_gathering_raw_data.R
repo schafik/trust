@@ -31,7 +31,7 @@ w2 <- readRDS("WVS_data/data/raw_data/wave2_raw.RDS") %>%
          health = V83, life = V96, gTrust = V94, 
          finance = V132, nTrust = V347_32, income = V363, 
          edu = V375, edu_c = V375CS) 
-      w2 <- left_join(w2, codes, by="country_code") %>% select(-country_code)
+      w2 <- left_join(w2, codes, by="country_code") #%>% select(-country_code)
       w2 <- smartNAs(w2)
   
   #writing out
@@ -57,7 +57,7 @@ w5 <- readRDS("WVS_data/data/raw_data/wave5_raw.RDS") %>%
          health = V11, life = V22, gTrust = V23, 
          finance = V68, nTrust = V126, 
          income = V253, edu = V238, edu_c = V238CS) 
-      w5 <- left_join(w5, codes, by="country_code") %>% select(-country_code)
+      w5 <- left_join(w5, codes, by="country_code") #%>% select(-country_code)
       w5 <- smartNAs(w5)
 
   #writing out
@@ -84,7 +84,7 @@ w6 <- readRDS("WVS_data/data/raw_data/wave6_raw.RDS") %>%
                health = V11, life = V23, gTrust = V24, 
                finance = V59, nTrust = V103, security = V170, 
                income = V239, edu = V248, edu_c = V248_CS) 
-        w6 <- left_join(w6, codes, by="country_code") %>% select(-country_code)
+        w6 <- left_join(w6, codes, by="country_code") #%>% select(-country_code)
         w6 <- smartNAs(w6)
 
   #writing out
