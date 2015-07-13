@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>WVS: Hypothesis testing</title>
+
+<script src="findings_files/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="findings_files/bootstrap-3.3.1/css/spacelab.min.css" rel="stylesheet" />
+<script src="findings_files/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="findings_files/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="findings_files/bootstrap-3.3.1/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="findings_files/highlight/default.css"
+      type="text/css" />
+<script src="findings_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div id="header">
+<h1 class="title">WVS: Hypothesis testing</h1>
+<h4 class="date"><em>Updated 13 July, 2015</em></h4>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#hypothesis-1-poor-people-more-myopic">Hypothesis 1: poor people more myopic</a><ul>
+<li><a href="#poor-4">poor = (≤ 4)</a></li>
+<li><a href="#other-definitions-of-poor">other definitions of poor</a><ul>
+<li><a href="#poor-3">poor = (≤ 3)</a></li>
+<li><a href="#poor-2">poor = (≤ 2)</a></li>
+<li><a href="#poor-1">poor = (≤ 1)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#hypothesis-1a-poor-people-less-general-trust">Hypothesis 1a: poor people less general trust</a><ul>
+<li><a href="#poor-4-1">poor = (≤ 4)</a></li>
+<li><a href="#other-definitions-of-poor-1">other definitions of poor</a><ul>
+<li><a href="#poor-3-1">poor = (≤ 3)</a></li>
+<li><a href="#poor-2-1">poor = (≤ 2)</a></li>
+<li><a href="#poor-1-1">poor = (≤ 1)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#hypothesis-1b-less-general-trust-more-mypoia">Hypothesis 1b: less general trust = more mypoia</a></li>
+<li><a href="#hypothesis-1-summary">Hypothesis 1 Summary:</a><ul>
+<li><a href="#poor-4-2">poor = (≤ 4)</a></li>
+<li><a href="#other-definitions-of-poor-2">other definitions of poor</a><ul>
+<li><a href="#poor-3-2">poor = (≤ 3)</a></li>
+<li><a href="#poor-2-2">poor = (≤ 2)</a></li>
+<li><a href="#poor-1-2">poor = (≤ 1)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#hypothesis-2-neighborhood-trust-not-different">Hypothesis 2: neighborhood trust not different</a></li>
+<li><a href="#hypothesis-3-poor-people-with-neighborhood-trust-less-myopic">Hypothesis 3: poor people with neighborhood trust less myopic</a><ul>
+<li><a href="#including-income-for-calculation-of-td-proxy">including income for calculation of TD proxy</a></li>
+<li><a href="#not-including-income">NOT including income</a></li>
+<li><a href="#means-of-td-proxy">means of TD proxy</a><ul>
+<li><a href="#including-income-for-calculation-of-td-proxy-1">including income for calculation of TD proxy</a></li>
+<li><a href="#not-including-income-1">NOT including income</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="hypothesis-1-poor-people-more-myopic" class="section level1">
+<h1>Hypothesis 1: poor people more myopic</h1>
+<p>…in comparison to high-income individuals. <strong>indeed</strong> found to be the case:</p>
+<div id="poor-4" class="section level2">
+<h2>poor = (≤ 4)</h2>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##   low_income discounting_factor
+## 1      FALSE          0.4402850
+## 2       TRUE         -0.5802993</code></pre>
+</div>
+<div id="other-definitions-of-poor" class="section level2">
+<h2>other definitions of poor</h2>
+<div id="poor-3" class="section level3">
+<h3>poor = (≤ 3)</h3>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##   low_income discounting_factor
+## 1      FALSE          0.3134917
+## 2       TRUE         -0.7559027</code></pre>
+</div>
+<div id="poor-2" class="section level3">
+<h3>poor = (≤ 2)</h3>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##   low_income discounting_factor
+## 1      FALSE          0.1830474
+## 2       TRUE         -0.9055859</code></pre>
+</div>
+<div id="poor-1" class="section level3">
+<h3>poor = (≤ 1)</h3>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##   low_income discounting_factor
+## 1      FALSE         0.09136873
+## 2       TRUE        -0.98249321</code></pre>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+</div>
+<div id="hypothesis-1a-poor-people-less-general-trust" class="section level1">
+<h1>Hypothesis 1a: poor people less general trust</h1>
+<p><strong>indeed</strong> in every definition of low income, there are as a percent within each group, less poor people that have general trust when compared to middle/high income individuals</p>
+<div id="poor-4-1" class="section level2">
+<h2>poor = (≤ 4)</h2>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income percent
+## 1 Most people can be trusted       TRUE    24.5
+## 2 Most people can be trusted      FALSE    28.9
+## 3    Need to be very careful       TRUE    75.5
+## 4    Need to be very careful      FALSE    71.1</code></pre>
+<p><img src="findings_files/figure-html/unnamed-chunk-6-1.png" title="" alt="" width="672" /></p>
+</div>
+<div id="other-definitions-of-poor-1" class="section level2">
+<h2>other definitions of poor</h2>
+<p>on the 1-10 income scale, we define poor as those that selected 3 or less etc…</p>
+<div id="poor-3-1" class="section level3">
+<h3>poor = (≤ 3)</h3>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income percent
+## 1 Most people can be trusted       TRUE   23.61
+## 2 Most people can be trusted      FALSE   28.38
+## 3    Need to be very careful       TRUE   76.39
+## 4    Need to be very careful      FALSE   71.62</code></pre>
+</div>
+<div id="poor-2-1" class="section level3">
+<h3>poor = (≤ 2)</h3>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income percent
+## 1 Most people can be trusted       TRUE   21.84
+## 2 Most people can be trusted      FALSE   28.00
+## 3    Need to be very careful       TRUE   78.16
+## 4    Need to be very careful      FALSE   72.00</code></pre>
+</div>
+<div id="poor-1-1" class="section level3">
+<h3>poor = (≤ 1)</h3>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income percent
+## 1 Most people can be trusted       TRUE   20.66
+## 2 Most people can be trusted      FALSE   27.48
+## 3    Need to be very careful       TRUE   79.34
+## 4    Need to be very careful      FALSE   72.52</code></pre>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+</div>
+<div id="hypothesis-1b-less-general-trust-more-mypoia" class="section level1">
+<h1>Hypothesis 1b: less general trust = more mypoia</h1>
+<p><strong>indeed</strong> less general trust means more discounting</p>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##                       gTrust discounting_factor
+## 1 most people can be trusted          0.3524498
+## 2    need to be very careful         -0.1052636</code></pre>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+<div id="hypothesis-1-summary" class="section level1">
+<h1>Hypothesis 1 Summary:</h1>
+<ul>
+<li>middle/high income people are <strong>less mypoic</strong> than low income people</li>
+<li>middle/high income people <strong>with general trust even less mypoic</strong> than counterparts with no general trust</li>
+<li>low income people are <strong>even more mypoic with no general trust</strong></li>
+</ul>
+<div id="poor-4-2" class="section level2">
+<h2>poor = (≤ 4)</h2>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income discounting_factor
+## 1 most people can be trusted      FALSE          0.6913303
+## 2 most people can be trusted       TRUE         -0.2206183
+## 3    need to be very careful      FALSE          0.3416947
+## 4    need to be very careful       TRUE         -0.6902386</code></pre>
+<p><img src="findings_files/figure-html/unnamed-chunk-11-1.png" title="" alt="" width="672" /></p>
+</div>
+<div id="other-definitions-of-poor-2" class="section level2">
+<h2>other definitions of poor</h2>
+<div id="poor-3-2" class="section level3">
+<h3>poor = (≤ 3)</h3>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income discounting_factor
+## 1 most people can be trusted      FALSE          0.5789164
+## 2 most people can be trusted       TRUE         -0.3708683
+## 3    need to be very careful      FALSE          0.2121024
+## 4    need to be very careful       TRUE         -0.8676475</code></pre>
+</div>
+<div id="poor-2-2" class="section level3">
+<h3>poor = (≤ 2)</h3>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income discounting_factor
+## 1 most people can be trusted      FALSE         0.47285919
+## 2 most people can be trusted       TRUE        -0.53019528
+## 3    need to be very careful      FALSE         0.07459563
+## 4    need to be very careful       TRUE        -1.00325036</code></pre>
+</div>
+<div id="poor-1-2" class="section level3">
+<h3>poor = (≤ 1)</h3>
+<pre><code>## Source: local data frame [4 x 3]
+## Groups: gTrust
+## 
+##                       gTrust low_income discounting_factor
+## 1 most people can be trusted      FALSE          0.4046767
+## 2 most people can be trusted       TRUE         -0.5956233
+## 3    need to be very careful      FALSE         -0.0227507
+## 4    need to be very careful       TRUE         -1.0787110</code></pre>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+</div>
+<div id="hypothesis-2-neighborhood-trust-not-different" class="section level1">
+<h1>Hypothesis 2: neighborhood trust not different</h1>
+<p><strong>indeed</strong> there is no significant variation across income level for neighborhood trust: <img src="findings_files/figure-html/unnamed-chunk-15-1.png" title="" alt="" width="1344" /></p>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+<div id="hypothesis-3-poor-people-with-neighborhood-trust-less-myopic" class="section level1">
+<h1>Hypothesis 3: poor people with neighborhood trust less myopic</h1>
+<div id="including-income-for-calculation-of-td-proxy" class="section level3">
+<h3>including income for calculation of TD proxy</h3>
+<pre class="r"><code>(1) &lt;- lm(pc1 ~ nTrust)
+(2) &lt;- lm(pc1 ~ nTrust + gTrust)
+(3) &lt;- lm(pc1 ~ nTrust * gTrust)
+(4) &lt;- lm(pc1 ~ nTrust * gTrust, data = LOWgTrust)</code></pre>
+<table style="text-align:center">
+<caption>
+<strong>Regression Results Including Income</strong>
+</caption>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+pc1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+nTrust
+</td>
+<td>
+0.103<sup>***</sup>
+</td>
+<td>
+0.060<sup>***</sup>
+</td>
+<td>
+0.077<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.005)
+</td>
+<td>
+(0.005)
+</td>
+<td>
+(0.011)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+gTrustneed to be very careful
+</td>
+<td>
+</td>
+<td>
+-0.483<sup>***</sup>
+</td>
+<td>
+-0.394<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.009)
+</td>
+<td>
+(0.049)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+nTrust:gTrustneed to be very careful
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-0.022<sup>*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.012)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-0.374<sup>***</sup>
+</td>
+<td>
+0.148<sup>***</sup>
+</td>
+<td>
+0.076<sup>*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.019)
+</td>
+<td>
+(0.021)
+</td>
+<td>
+(0.044)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+155,855
+</td>
+<td>
+155,855
+</td>
+<td>
+155,855
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.003
+</td>
+<td>
+0.021
+</td>
+<td>
+0.021
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.003
+</td>
+<td>
+0.021
+</td>
+<td>
+0.021
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+1.550 (df = 155853)
+</td>
+<td>
+1.536 (df = 155852)
+</td>
+<td>
+1.536 (df = 155851)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+459.556<sup>***</sup> (df = 1; 155853)
+</td>
+<td>
+1,682.158<sup>***</sup> (df = 2; 155852)
+</td>
+<td>
+1,122.612<sup>***</sup> (df = 3; 155851)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<div id="not-including-income" class="section level3">
+<h3>NOT including income</h3>
+<pre class="r"><code>(1) &lt;- lm(pc1 ~ nTrust)
+(2) &lt;- lm(pc1 ~ nTrust + gTrust)
+(3) &lt;- lm(pc1 ~ nTrust * gTrust)</code></pre>
+<table style="text-align:center">
+<caption>
+<strong>Regression Results NOT Including Income</strong>
+</caption>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+pc1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+nTrust
+</td>
+<td>
+0.106<sup>***</sup>
+</td>
+<td>
+0.067<sup>***</sup>
+</td>
+<td>
+0.088<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.004)
+</td>
+<td>
+(0.004)
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+gTrustneed to be very careful
+</td>
+<td>
+</td>
+<td>
+-0.437<sup>***</sup>
+</td>
+<td>
+-0.329<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.008)
+</td>
+<td>
+(0.045)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+nTrust:gTrustneed to be very careful
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-0.027<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.011)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-0.394<sup>***</sup>
+</td>
+<td>
+0.078<sup>***</sup>
+</td>
+<td>
+-0.009
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.017)
+</td>
+<td>
+(0.019)
+</td>
+<td>
+(0.040)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+164,956
+</td>
+<td>
+164,956
+</td>
+<td>
+164,956
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.003
+</td>
+<td>
+0.020
+</td>
+<td>
+0.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.003
+</td>
+<td>
+0.020
+</td>
+<td>
+0.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+1.469 (df = 164954)
+</td>
+<td>
+1.457 (df = 164953)
+</td>
+<td>
+1.457 (df = 164952)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+577.088<sup>***</sup> (df = 1; 164954)
+</td>
+<td>
+1,692.051<sup>***</sup> (df = 2; 164953)
+</td>
+<td>
+1,130.077<sup>***</sup> (df = 3; 164952)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+<div id="means-of-td-proxy" class="section level2">
+<h2>means of TD proxy</h2>
+<p>broken down by neighborhood trust and general trust. <strong>indeed</strong> the case that effect of low general trust on temporal discounting is buffered by increasing neighborhood trust!!</p>
+<div id="including-income-for-calculation-of-td-proxy-1" class="section level3">
+<h3>including income for calculation of TD proxy</h3>
+<pre><code>## Source: local data frame [10 x 3]
+## Groups: nTrust
+## 
+##    nTrust                     gTrust discounting_factor
+## 1       1 most people can be trusted        -0.87534580
+## 2       1    need to be very careful        -1.17086818
+## 3       2 most people can be trusted         0.08764684
+## 4       2    need to be very careful        -0.23850438
+## 5       3 most people can be trusted         0.26104152
+## 6       3    need to be very careful        -0.13387118
+## 7       4 most people can be trusted         0.43928781
+## 8       4    need to be very careful        -0.07718682
+## 9       5 most people can be trusted         0.39925960
+## 10      5    need to be very careful        -0.08642850</code></pre>
+</div>
+<div id="not-including-income-1" class="section level3">
+<h3>NOT including income</h3>
+<pre><code>## Source: local data frame [10 x 3]
+## Groups: nTrust
+## 
+##    nTrust                     gTrust discounting_factor
+## 1       1 most people can be trusted        -0.58806363
+## 2       1    need to be very careful        -0.99620689
+## 3       2 most people can be trusted         0.07387797
+## 4       2    need to be very careful        -0.21912762
+## 5       3 most people can be trusted         0.22369363
+## 6       3    need to be very careful        -0.14394197
+## 7       4 most people can be trusted         0.37990871
+## 8       4    need to be very careful        -0.08096854
+## 9       5 most people can be trusted         0.38830949
+## 10      5    need to be very careful        -0.05921662</code></pre>
+<p><br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
