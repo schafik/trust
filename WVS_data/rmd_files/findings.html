@@ -63,7 +63,7 @@ img {
 
 <div id="header">
 <h1 class="title">WVS: Hypothesis testing</h1>
-<h4 class="date"><em>Updated 10 July, 2015</em></h4>
+<h4 class="date"><em>Updated 13 July, 2015</em></h4>
 </div>
 
 <div id="TOC">
@@ -204,10 +204,11 @@ img {
 <div id="hypothesis-1b-less-general-trust-more-mypoia" class="section level1">
 <h1>Hypothesis 1b: less general trust = more mypoia</h1>
 <p><strong>indeed</strong> less general trust means more discounting</p>
-<pre class="r"><code># fit1 &lt;- glm(as.factor(gTrust) ~ pc1, data = pca_val_dataNOINCOME, family = binomial())
-# summary(fit1) 
-pca_val_dataNOINCOME %&gt;% group_by(gTrust) %&gt;% 
-  summarise(discounting_factor = mean(pc1, na.rm = T)) </code></pre>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##                       gTrust discounting_factor
+## 1 most people can be trusted          0.3524498
+## 2    need to be very careful         -0.1052636</code></pre>
 <p><br />
 <a href="#TOC">back to table of contents</a></p>
 </div>
@@ -281,7 +282,8 @@ pca_val_dataNOINCOME %&gt;% group_by(gTrust) %&gt;%
 <h3>including income for calculation of TD proxy</h3>
 <pre class="r"><code>(1) &lt;- lm(pc1 ~ nTrust)
 (2) &lt;- lm(pc1 ~ nTrust + gTrust)
-(3) &lt;- lm(pc1 ~ nTrust * gTrust)</code></pre>
+(3) &lt;- lm(pc1 ~ nTrust * gTrust)
+(4) &lt;- lm(pc1 ~ nTrust * gTrust, data = LOWgTrust)</code></pre>
 <table style="text-align:center">
 <caption>
 <strong>Regression Results Including Income</strong>

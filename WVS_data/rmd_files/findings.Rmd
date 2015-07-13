@@ -134,7 +134,7 @@ general %>% select(-c(nums:total)) %>% arrange(desc(low_income))
 
 **indeed** less general trust means more discounting
 
-```{r, eval=FALSE}
+```{r, echo=FALSE}
 # fit1 <- glm(as.factor(gTrust) ~ pc1, data = pca_val_dataNOINCOME, family = binomial())
 # summary(fit1) 
 pca_val_dataNOINCOME %>% group_by(gTrust) %>% 
@@ -244,6 +244,7 @@ fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_data)
 (1) <- lm(pc1 ~ nTrust)
 (2) <- lm(pc1 ~ nTrust + gTrust)
 (3) <- lm(pc1 ~ nTrust * gTrust)
+(4) <- lm(pc1 ~ nTrust * gTrust, data = LOWgTrust)
 ```
 
 ```{r, results='asis', echo=FALSE}
@@ -274,6 +275,7 @@ fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_dataNOINCOME)
 ```{r, results='asis', echo=FALSE}
 stargazer(fit1, fit2, fit3, title="Regression Results NOT Including Income", align=TRUE, type="html")
 ```
+
 
 \
 [back to table of contents](#TOC)
