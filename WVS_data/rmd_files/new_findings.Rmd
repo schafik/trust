@@ -1,0 +1,27 @@
+
+---
+title: "WVS: correlational data"
+date: "Updated `r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: yes
+    number_sections: no
+    theme: spacelab
+    self_contained: no
+---
+
+#generalized trust 
+Show across region/continent low-income groups vs middle/high income groups levels of generalized trust (hypothesis 1a)
+
+
+#community trust 
+Show community trust across region/continent and income (hypothesis 2)
+
+
+#generalized trust with 5 factors
+
+#generalized trust + community trust with 5 factors
+Show general trust and community trust across 5 factors 
+
+•	
+

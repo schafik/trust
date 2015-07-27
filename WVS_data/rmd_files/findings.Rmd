@@ -17,37 +17,10 @@ pca_val_dataNOINCOME <- read_csv("/git_repositories/trust/WVS_data/data/pca/pca_
 ```
 
 #Hypothesis 1: poor people more myopic
-...in comparison to high-income individuals. **indeed** found to be the case:
+...in comparison to high-income individuals. 
+  + poor is defined as individuals who selected 1 on 1-10 scale of subjective income 
 
-##poor = (≤ 4)
-```{r, echo=FALSE}
-hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
-          mutate(low_income = ifelse(income <=4, T, F)) %>%
-          group_by(low_income) %>% 
-          summarise(discounting_factor = mean(pc1, na.rm = T)) 
-hyp1
-```
-
-##other definitions of poor
-###poor = (≤ 3)
-```{r, echo=FALSE}
-hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
-          mutate(low_income = ifelse(income <=3, T, F)) %>%
-          group_by(low_income) %>% 
-          summarise(discounting_factor = mean(pc1, na.rm = T)) 
-hyp1
-```
-
-###poor = (≤ 2)
-```{r, echo=FALSE}
-hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
-          mutate(low_income = ifelse(income <=2, T, F)) %>%
-          group_by(low_income) %>% 
-          summarise(discounting_factor = mean(pc1, na.rm = T)) 
-hyp1
-```
-
-###poor = (≤ 1)
+**indeed** found to be the case:
 ```{r, echo=FALSE}
 hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
           mutate(low_income = ifelse(income <=1, T, F)) %>%
@@ -56,6 +29,23 @@ hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
 hyp1
 ```
 
+```{r, echo=FALSE, eval=FALSE}
+##other definitions of poor
+###poor = (≤ 3)
+hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
+          mutate(low_income = ifelse(income <=3, T, F)) %>%
+          group_by(low_income) %>% 
+          summarise(discounting_factor = mean(pc1, na.rm = T)) 
+hyp1
+```
+```{r, echo=FALSE, eval=FALSE}
+###poor = (≤ 2)
+hyp1 <- pca_val_dataNOINCOME %>% filter(!is.na(income)) %>%
+          mutate(low_income = ifelse(income <=2, T, F)) %>%
+          group_by(low_income) %>% 
+          summarise(discounting_factor = mean(pc1, na.rm = T)) 
+hyp1
+```
 \
 [back to table of contents](#TOC)
 
@@ -63,8 +53,25 @@ hyp1
 
 **indeed** in every definition of low income, there are as a percent within each group, less poor people that have general trust when compared to middle/high income individuals
 
-##poor = (≤ 4)
 ```{r, echo=FALSE}
+general <- wvs_data %>% filter(!is.na(gTrust), !is.na(income)) %>%
+          select(gTrust, low_income = lowIncome_1) 
+denoms <- general %>% group_by(low_income) %>% summarize(denoms = n()) 
+general <- general %>% group_by(gTrust, low_income) %>% summarize(nums = n()) %>%
+          mutate(total = ifelse(low_income, as.numeric(denoms[[2,2]]), as.numeric(denoms[[1,2]])),
+                 percent = round(100*nums/total, digits = 2))
+
+
+general %>% select(-c(nums:total)) %>% arrange(desc(low_income))
+
+# ggplot(data=general, aes(x=gTrust, y=percent , fill = low_income)) +
+#     geom_bar(stat="identity", position=position_dodge(), colour = "black") + 
+#   theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + xlab("")
+```
+
+
+```{r, echo=FALSE, eval=FALSE}
+##poor = (≤ 4)
 general <- wvs_data %>% filter(!is.na(gTrust), !is.na(income)) %>%
           select(gTrust, low_income = lowIncome_4) 
 denoms <- general %>% group_by(low_income) %>% summarize(denoms = n()) 
@@ -78,12 +85,11 @@ ggplot(data=general, aes(x=gTrust, y=percent , fill = low_income)) +
   theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + 
   xlab("") + ggtitle("General Trust by Income")
 ```
-
+```{r, echo=FALSE, eval=FALSE}
 ##other definitions of poor
 on the 1-10 income scale, we define poor as those that selected 3 or less etc...
 
 ###poor = (≤ 3)
-```{r, echo=FALSE}
 general <- wvs_data %>% filter(!is.na(gTrust), !is.na(income)) %>%
           select(gTrust, low_income = lowIncome_3) 
 denoms <- general %>% group_by(low_income) %>% summarize(denoms = n()) 
@@ -96,26 +102,10 @@ general %>% select(-c(nums:total)) %>% arrange(desc(low_income))
 #     geom_bar(stat="identity", position=position_dodge(), colour = "black") + 
 #   theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + xlab("")
 ```
-
+```{r, echo=FALSE, eval=FALSE}
 ###poor = (≤ 2)
-```{r, echo=FALSE}
 general <- wvs_data %>% filter(!is.na(gTrust), !is.na(income)) %>%
           select(gTrust, low_income = lowIncome_2) 
-denoms <- general %>% group_by(low_income) %>% summarize(denoms = n()) 
-general <- general %>% group_by(gTrust, low_income) %>% summarize(nums = n()) %>%
-          mutate(total = ifelse(low_income, as.numeric(denoms[[2,2]]), as.numeric(denoms[[1,2]])),
-                 percent = round(100*nums/total, digits = 2))
-general %>% select(-c(nums:total)) %>% arrange(desc(low_income))
-
-# ggplot(data=general, aes(x=gTrust, y=percent , fill = low_income)) +
-#     geom_bar(stat="identity", position=position_dodge(), colour = "black") + 
-#   theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + xlab("")
-```
-
-###poor = (≤ 1)
-```{r, echo=FALSE}
-general <- wvs_data %>% filter(!is.na(gTrust), !is.na(income)) %>%
-          select(gTrust, low_income = lowIncome_1) 
 denoms <- general %>% group_by(low_income) %>% summarize(denoms = n()) 
 general <- general %>% group_by(gTrust, low_income) %>% summarize(nums = n()) %>%
           mutate(total = ifelse(low_income, as.numeric(denoms[[2,2]]), as.numeric(denoms[[1,2]])),
@@ -135,10 +125,19 @@ general %>% select(-c(nums:total)) %>% arrange(desc(low_income))
 **indeed** less general trust means more discounting
 
 ```{r, echo=FALSE}
-# fit1 <- glm(as.factor(gTrust) ~ pc1, data = pca_val_dataNOINCOME, family = binomial())
-# summary(fit1) 
-pca_val_dataNOINCOME %>% group_by(gTrust) %>% 
-  summarise(discounting_factor = mean(pc1, na.rm = T)) 
+yo <- pca_val_dataNOINCOME %>% group_by(gTrust) %>% 
+        summarise(discounting_factor = mean(pc1, na.rm = T))
+
+ggplot(data=yo, aes(x=gTrust, y=discounting_factor)) +
+    geom_bar(stat="identity", colour = "black") 
+yo
+
+t.test(pc1 ~ gTrust, data = pca_val_dataNOINCOME)
+
+# ggplot(data=yo, aes(x=gTrust, y=)) +
+#     geom_line() + geom_point() + xlab("") +
+#     theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + 
+#     ggtitle("Discounting Factor by \nGeneral Trust & Income")
 ```
 
 \
@@ -161,7 +160,7 @@ hyp_1
 ggplot(data=hyp_1, aes(x=gTrust, y=discounting_factor, colour=low_income, group=low_income)) +
     geom_line() + geom_point() + xlab("") +
     theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + 
-    ggtitle("Average Discounting Factor by Group:\nGeneral Trust & Income")
+    ggtitle("Discounting Factor by \nGeneral Trust & Income")
 ```
   
 ##other definitions of poor
@@ -223,10 +222,11 @@ ggplot(data=hood, aes(x=income, fill=nTrust)) +
 \
 [back to table of contents](#TOC)
 
-#Hypothesis 3: poor people with neighborhood trust less myopic 
+#Hypothesis 3: poor people with higher neighborhood trust less myopic 
 
+```{r, echo=FALSE, eval=FALSE}
 ###including income for calculation of TD proxy
-```{r, echo=FALSE}
+
 #neighborhood trust
 fit1 <- lm(pc1 ~ nTrust, data = pca_val_data)
 # summary(fit1)
@@ -240,17 +240,17 @@ fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_data)
 # summary(fit3)
 ```
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 (1) <- lm(pc1 ~ nTrust)
 (2) <- lm(pc1 ~ nTrust + gTrust)
 (3) <- lm(pc1 ~ nTrust * gTrust)
 ```
 
-```{r, results='asis', echo=FALSE}
+```{r, results='asis', echo=FALSE, eval=FALSE}
 stargazer(fit1, fit2, fit3, title="Regression Results Including Income", align=TRUE, type="html")
 ```
 
-###NOT including income
+
 ```{r, echo=FALSE}
 #neighborhood trust
 fit1 <- lm(pc1 ~ nTrust, data = pca_val_dataNOINCOME)
@@ -275,25 +275,66 @@ fit3 <- lm(pc1 ~ nTrust * gTrust, data = pca_val_dataNOINCOME)
 stargazer(fit1, fit2, fit3, title="Regression Results NOT Including Income", align=TRUE, type="html")
 ```
 
+\
+[back to table of contents](#TOC)
+
+###low income individuals only (= 1 on scale of 1-10)
+```{r, echo=FALSE}
+#neighborhood trust
+fit1 <- lm(pc1 ~ nTrust, data = filter(pca_val_dataNOINCOME, income <= 1))
+# summary(fit1)
+
+#neighborhood trust controlling for general trust (additave model... IVs very different)
+fit2 <- lm(pc1 ~ nTrust + gTrust, data = filter(pca_val_dataNOINCOME, income <= 1))
+# summary(fit2)
+
+#neighborhood trust controlling for general trust (interactions between IVs)
+fit3 <- lm(pc1 ~ nTrust * gTrust, data = filter(pca_val_dataNOINCOME, income <= 1))
+# summary(fit3)
+```
+
+```{r, eval=FALSE}
+(1) <- lm(pc1 ~ nTrust)
+(2) <- lm(pc1 ~ nTrust + gTrust)
+(3) <- lm(pc1 ~ nTrust * gTrust)
+```
+
+```{r, results='asis', echo=FALSE}
+stargazer(fit1, fit2, fit3, title="Regression Results FOR LOW INCOME INDIVIDUALS ONLY", align=TRUE, type="html")
+```
 
 \
 [back to table of contents](#TOC)
 
 ##means of TD proxy
-broken down by neighborhood trust and general trust. **indeed** the case that effect of low general trust on temporal discounting is buffered by increasing neighborhood trust!! 
+broken down by neighborhood trust and general trust. **indeed** the case that effect of low general trust on temporal discounting is buffered by increasing neighborhood trust!
 
+```{r, echo=FALSE, eval=FALSE}
 ###including income for calculation of TD proxy
-```{r, echo=FALSE}
-pca_val_data %>% group_by(nTrust, gTrust) %>% 
+pca_val_data %>% filter(income <= 1) %>%
+  group_by(nTrust, gTrust) %>% 
   summarise(discounting_factor = mean(pc1, na.rm = T)) 
 ```
 
-###NOT including income 
 ```{r, echo=FALSE}
-pca_val_dataNOINCOME %>% group_by(nTrust, gTrust) %>% 
-  summarise(discounting_factor = mean(pc1, na.rm = T)) 
+yo <- pca_val_dataNOINCOME %>% filter(income <= 1) %>%
+        group_by(nTrust, gTrust) %>% 
+        summarise(discounting_factor = mean(pc1, na.rm = T)) 
+ggplot(data=yo, aes(x=nTrust, y=discounting_factor, colour=gTrust, group=gTrust)) +
+    geom_line() + geom_point() + xlab("Neighborhood Trust") +
+    theme(legend.position="bottom", axis.text.x  = element_text(face="bold")) + 
+    ggtitle("Discounting Factor by \nGeneral Trust & Neighborhood Trust")
 ```
 
 \
 [back to table of contents](#TOC)
+
+
+
+```{r}
+nTrust + gTrust => "downstream effects"
+  #bullet points 
+  
+
+```
 
