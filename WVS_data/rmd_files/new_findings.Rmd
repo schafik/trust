@@ -142,15 +142,15 @@ ggplot(wvs_data %>% filter(!is.na(nTrust)), aes(x=income, fill=nTrust)) +
 #generalized trust with 5 factors
 
 ```{r, eval=FALSE, echo=FALSE}
-# yo <- wvs_data %>% dplyr::select(gTrust, happy) %>% 
-#         filter(!is.na(gTrust), !is.na(happy)) 
-# plot(yo)
+
 ```
 
 #generalized trust + community trust with 5 factors
 Show general trust and community trust across 5 factors.... 
 ```{r, eval=FALSE, echo=FALSE}
-??
+ggplot(data=wvs_data, 
+      aes(x=factor(health), y=gTrust, group=income, colour=income)) +
+      geom_line() + geom_point()
 ```
 
 •	
