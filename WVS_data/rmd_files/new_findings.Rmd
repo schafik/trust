@@ -10,18 +10,108 @@ output:
     self_contained: no
 ---
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("/git_repositories/trust/WVS_data/scripts/load_libraries.R")
+source("/git_repositories/bangla/scripts/plotting_functions.R")
+wvs_data <- readRDS("/git_repositories/trust/WVS_data/data/in_process_data/fulldata_cleaned.RDS") %>%
+              filter(!is.na(income))
+```
+
 #generalized trust 
-Show across region/continent low-income groups vs middle/high income groups levels of generalized trust (hypothesis 1a)
+
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "gTrust", coordflippin = T)
+```
+
+##by income
+```{r, echo=FALSE, fig.height=9}
+ggplot(wvs_data %>% filter(!is.na(gTrust)), 
+       aes(x=gTrust, fill = gTrust)) + geom_bar(stat="bin") + 
+#   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
+  facet_grid(income ~ .) + theme(axis.text.x = element_blank()) + 
+  scale_fill_discrete(name="General Trust")
+```
+
+###income ≤ 4
+```{r, echo=FALSE, fig.width=12, fig.height=5}
+plot_percent(wvs_data %>% filter(lowIncome_4), "gTrust", coordflippin = T)
+```
+
+###income ≤ 3 
+```{r, echo=FALSE, fig.width=12, fig.height=5}
+plot_percent(wvs_data %>% filter(lowIncome_3), "gTrust", coordflippin = T)
+```
+
+###income ≤ 2 
+```{r, echo=FALSE, fig.width=12, fig.height=5}
+plot_percent(wvs_data %>% filter(lowIncome_2), "gTrust", coordflippin = T)
+```
+
+###income ≤ 1
+```{r, echo=FALSE, fig.width=12, fig.height=5}
+plot_percent(wvs_data %>% filter(lowIncome_1), "gTrust", coordflippin = T)
+```
+
+
+less and less trust relatively when changing income definition:
+
+```{r, echo=FALSE, fig.width=12, fig.height=5}
+# general <- wvs_data %>% filter(gTrust == "Most people can be trusted")
+# plot_percent2(general, "gTrust", "lowIncome_4", coordflippin = F) + 
+#   scale_fill_discrete(name="Low Income") + ggtitle("Low Income ≤ 4 \non scale of 10")
+# plot_percent2(general, "gTrust", "lowIncome_3", coordflippin = F) + 
+#   scale_fill_discrete(name="Low Income") + ggtitle("Low Income ≤ 3 \non scale of 10")
+# plot_percent2(general, "gTrust", "lowIncome_2", coordflippin = F) + 
+#   scale_fill_discrete(name="Low Income") + ggtitle("Low Income ≤ 2 \non scale of 10")
+# plot_percent2(general, "gTrust", "lowIncome_1", coordflippin = F) + 
+#   scale_fill_discrete(name="Low Income") + ggtitle("Low Income = 1 \non scale of 10"); remove(general)
+```
+
+\
+[back to table of contents](#TOC)
+
+##by continent
+
+```{r, echo=FALSE, fig.width=14, fig.height=7}
+ggplot(wvs_data %>% filter(!is.na(continent), !is.na(gTrust)), 
+       aes(x=gTrust, fill = gTrust)) + geom_bar(stat="bin") + 
+#   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
+  facet_grid(income ~ continent) + theme(axis.text.x = element_blank()) + 
+  scale_fill_discrete(name="General Trust")
+```
+
+\
+[back to table of contents](#TOC)
 
 
 #community trust 
-Show community trust across region/continent and income (hypothesis 2)
+community trust does not vary across 
+```{r, echo=FALSE, fig.width=14, fig.height=7}
+ggplot(wvs_data %>% filter(!is.na(nTrust)), 
+       aes(x=nTrust, fill = nTrust)) + geom_bar(stat="bin") + 
+#   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
+  facet_grid(income ~ .) + theme(axis.text.x = element_blank()) + 
+  scale_fill_discrete(name="Community Trust")
+```
+
+\
+[back to table of contents](#TOC)
 
 
 #generalized trust with 5 factors
 
+```{r, eval=FALSE, echo=FALSE}
+# yo <- wvs_data %>% dplyr::select(gTrust, happy) %>% 
+#         filter(!is.na(gTrust), !is.na(happy)) 
+# plot(yo)
+```
+
 #generalized trust + community trust with 5 factors
-Show general trust and community trust across 5 factors 
+Show general trust and community trust across 5 factors.... 
+```{r, eval=FALSE, echo=FALSE}
+??
+```
 
 •	
 
