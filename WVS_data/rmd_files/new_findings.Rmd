@@ -25,36 +25,63 @@ plot_percent(wvs_data, "gTrust", coordflippin = T)
 ```
 
 ##by income
-```{r, echo=FALSE, fig.height=9}
-ggplot(wvs_data %>% filter(!is.na(gTrust)), 
-       aes(x=gTrust, fill = gTrust)) + geom_bar(stat="bin") + 
-#   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
-  facet_grid(income ~ .) + theme(axis.text.x = element_blank()) + 
-  scale_fill_discrete(name="General Trust")
+```{r, echo=FALSE, fig.height=7, fig.width=11}
+# ggplot(wvs_data %>% filter(!is.na(gTrust)), 
+#        aes(x=gTrust, fill = gTrust)) + geom_bar(stat="bin") + 
+# #   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
+#   facet_grid(income ~ .) + theme(axis.text.x = element_blank()) + 
+#   scale_fill_discrete(name="General Trust")
+
+#box and whisks
+# ggplot(wvs_data %>% filter(!is.na(gTrust)), 
+#        aes(x=gTrust, y=income, fill=gTrust)) + 
+#   geom_boxplot() + guides(fill=FALSE) + coord_flip()
+
+#dists by density
+# ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, colour=gTrust)) + 
+#     geom_density() + scale_x_continuous(breaks=seq(0, 10, 1))
+
+ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) + 
+    geom_density(alpha=.5) + scale_x_continuous(breaks=seq(0, 10, 1)) + 
+    scale_fill_discrete(name="General Trust") + 
+    ggtitle("General Trust by Income")
+
+#dists by hists
+# ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) +
+#     geom_histogram(binwidth=.5, alpha=.5, position="identity") + 
+#     scale_x_continuous(breaks=seq(0, 10, 1))
+
+# ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) +
+#     geom_histogram(binwidth=.5, position="dodge") + 
+#     scale_x_continuous(breaks=seq(0, 10, 1))
 ```
 
-###income ≤ 4
-```{r, echo=FALSE, fig.width=12, fig.height=5}
-plot_percent(wvs_data %>% filter(lowIncome_4), "gTrust", coordflippin = T)
+\
+[back to table of contents](#TOC)
+
+##by varying definitions of income
+**less and less trust** relatively when changing income definition:
+
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data %>% filter(lowIncome_4), "gTrust", coordflippin = T) + 
+  ggtitle("Income ≤ 4") + theme(plot.title = element_text(face="bold"))
 ```
 
-###income ≤ 3 
-```{r, echo=FALSE, fig.width=12, fig.height=5}
-plot_percent(wvs_data %>% filter(lowIncome_3), "gTrust", coordflippin = T)
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data %>% filter(lowIncome_3), "gTrust", coordflippin = T) +
+  ggtitle("Income ≤ 3") + theme(plot.title = element_text(face="bold"))
 ```
 
-###income ≤ 2 
-```{r, echo=FALSE, fig.width=12, fig.height=5}
-plot_percent(wvs_data %>% filter(lowIncome_2), "gTrust", coordflippin = T)
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data %>% filter(lowIncome_2), "gTrust", coordflippin = T) +
+  ggtitle("Income ≤ 2") + theme(plot.title = element_text(face="bold"))
 ```
 
-###income ≤ 1
-```{r, echo=FALSE, fig.width=12, fig.height=5}
-plot_percent(wvs_data %>% filter(lowIncome_1), "gTrust", coordflippin = T)
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data %>% filter(lowIncome_1), "gTrust", coordflippin = T) +
+  ggtitle("Income = 1") + theme(plot.title = element_text(face="bold"))
 ```
 
-
-less and less trust relatively when changing income definition:
 
 ```{r, echo=FALSE, fig.width=12, fig.height=5}
 # general <- wvs_data %>% filter(gTrust == "Most people can be trusted")
@@ -84,15 +111,28 @@ ggplot(wvs_data %>% filter(!is.na(continent), !is.na(gTrust)),
 \
 [back to table of contents](#TOC)
 
-
 #community trust 
-community trust does not vary across 
+community trust **does not vary across income**. nearly identical proportional distribution: 
 ```{r, echo=FALSE, fig.width=14, fig.height=7}
-ggplot(wvs_data %>% filter(!is.na(nTrust)), 
-       aes(x=nTrust, fill = nTrust)) + geom_bar(stat="bin") + 
-#   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
-  facet_grid(income ~ .) + theme(axis.text.x = element_blank()) + 
-  scale_fill_discrete(name="Community Trust")
+# ggplot(wvs_data %>% filter(!is.na(nTrust)), 
+#        aes(x=nTrust, fill = nTrust)) + geom_bar(stat="bin") + 
+# #   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
+#   facet_grid(income ~ .) + theme(axis.text.x = element_blank()) + 
+#   scale_fill_discrete(name="Community Trust")
+
+# ggplot(wvs_data %>% filter(!is.na(nTrust)), aes(x=income, fill=nTrust)) + 
+#     geom_density(alpha=.3) + scale_x_continuous(breaks=seq(0, 10, 1)) + 
+#     scale_fill_discrete(name="Community Trust") + 
+#     ggtitle("Community Trust by Income")
+
+# ggplot(wvs_data %>% filter(!is.na(nTrust)), aes(x=income, fill=nTrust)) +
+#     geom_histogram(binwidth=.5, alpha=.5, position="identity") + 
+#     scale_x_continuous(breaks=seq(0, 10, 1)) +
+#     ggtitle("Community Trust by Income")
+
+ggplot(wvs_data %>% filter(!is.na(nTrust)), aes(x=income, fill=nTrust)) +
+    geom_histogram(binwidth=.5, position="dodge") + 
+    scale_x_continuous(breaks=seq(0, 10, 1))
 ```
 
 \
