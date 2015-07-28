@@ -10,4 +10,4 @@ output:
 
 ### WVS Survey data
 
- * [findings](http://schafik.github.io/trust/findings.html)
+ * [findings](http://schafik.github.io/trust/new_findings.html)
