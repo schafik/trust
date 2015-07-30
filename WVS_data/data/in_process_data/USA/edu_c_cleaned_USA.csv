@@ -1,0 +1,16 @@
+"edu_c","tally","percent"
+"US: No formal education",10,0.4
+"US: 1st, 2nd, 3rd, or 4th grade",11,0.5
+"US: 5th or 6th grade",33,1.5
+"US: 7th or 8th grade",40,1.8
+"US: 9th grade",35,1.6
+"US: 10th grade",49,2.2
+"US: 11th grade",54,2.4
+"US: 12th grade NO DIPLOMA",72,3.2
+"US: HIGH SCHOOL GRADUATE - high school DIPLOMA or the equivalent (GED)",683,30.6
+"US: Some college, no degree",441,19.7
+"US: Associate degree",189,8.5
+"US: Bachelors degree",362,16.2
+"US: Masters degree",181,8.1
+"US: Professional or Doctorate degree",74,3.3
+"(N)",2232,100
