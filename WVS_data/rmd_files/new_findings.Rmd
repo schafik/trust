@@ -1,6 +1,6 @@
 
 ---
-title: "WVS: correlational data"
+title: "WVS: archival data"
 date: "Updated `r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
@@ -13,19 +13,19 @@ output:
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("/git_repositories/trust/WVS_data/scripts/load_libraries.R")
 source("/git_repositories/bangla/scripts/plotting_functions.R")
-wvs_data <- readRDS("/git_repositories/trust/WVS_data/data/in_process_data/fulldata_cleaned.RDS") %>%
-              filter(!is.na(income))
+wvs_data <- readRDS("/git_repositories/trust/WVS_data/data/in_process_data/fulldata_cleaned.RDS") %>% 
+        filter(!is.na(income))
 ```
 
 #generalized trust 
 
 overall distribution is as follows: 
 ```{r, echo=FALSE, fig.width=12, fig.height=3}
-plot_percent(wvs_data, "gTrust", coordflippin = T)
+plot_percent(wvs_data, "gTrust", coordflippin = T, removeNAs = F)
 ```
 
 ##by income
-```{r, echo=FALSE, fig.height=7, fig.width=11}
+```{r, echo=FALSE, fig.height=7, fig.width=9}
 # ggplot(wvs_data %>% filter(!is.na(gTrust)), 
 #        aes(x=gTrust, fill = gTrust)) + geom_bar(stat="bin") + 
 # #   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
@@ -41,10 +41,22 @@ plot_percent(wvs_data, "gTrust", coordflippin = T)
 # ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, colour=gTrust)) + 
 #     geom_density() + scale_x_continuous(breaks=seq(0, 10, 1))
 
-ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) + 
-    geom_density(alpha=.5) + scale_x_continuous(breaks=seq(0, 10, 1)) + 
-    scale_fill_discrete(name="General Trust") + 
-    ggtitle("General Trust by Income")
+# ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) + 
+#     geom_density(alpha=.5) + scale_x_continuous(breaks=seq(0, 10, 1)) + 
+#     scale_fill_discrete(name="General Trust") + 
+#     ggtitle("General Trust by Income")
+
+income <- wvs_data %>% filter(!is.na(gTrust)) %>% group_by(income, gTrust) %>% 
+            summarize(number = n()) %>% group_by(income) %>% 
+            mutate(total = sum(number), percent = round(100*number/total, digits = 0))
+
+ggplot(income, aes(x=income, y=percent, fill=gTrust)) +
+    geom_histogram(binwidth=.5, alpha=.5, stat="identity") + 
+    scale_x_continuous(breaks=seq(0, 10, 1)) 
+
+# ggplot(income, aes(x=income, y=percent, fill=gTrust)) +
+#     geom_histogram(binwidth=.25, alpha=.5, stat="identity", position="dodge") + 
+#     scale_x_continuous(breaks=seq(0, 10, 1))
 
 #dists by hists
 # ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) +
@@ -56,32 +68,20 @@ ggplot(wvs_data %>% filter(!is.na(gTrust)), aes(x=income, fill=gTrust)) +
 #     scale_x_continuous(breaks=seq(0, 10, 1))
 ```
 
-\
-[back to table of contents](#TOC)
 
+```{r, eval=FALSE, echo=FALSE, fig.width=12, fig.height=3}
 ##by varying definitions of income
 **less and less trust** relatively when changing income definition:
 
-```{r, echo=FALSE, fig.width=12, fig.height=3}
 plot_percent(wvs_data %>% filter(lowIncome_4), "gTrust", coordflippin = T) + 
   ggtitle("Income ≤ 4") + theme(plot.title = element_text(face="bold"))
-```
-
-```{r, echo=FALSE, fig.width=12, fig.height=3}
 plot_percent(wvs_data %>% filter(lowIncome_3), "gTrust", coordflippin = T) +
   ggtitle("Income ≤ 3") + theme(plot.title = element_text(face="bold"))
-```
-
-```{r, echo=FALSE, fig.width=12, fig.height=3}
 plot_percent(wvs_data %>% filter(lowIncome_2), "gTrust", coordflippin = T) +
   ggtitle("Income ≤ 2") + theme(plot.title = element_text(face="bold"))
-```
-
-```{r, echo=FALSE, fig.width=12, fig.height=3}
 plot_percent(wvs_data %>% filter(lowIncome_1), "gTrust", coordflippin = T) +
   ggtitle("Income = 1") + theme(plot.title = element_text(face="bold"))
 ```
-
 
 ```{r, echo=FALSE, fig.width=12, fig.height=5}
 # general <- wvs_data %>% filter(gTrust == "Most people can be trusted")
@@ -95,12 +95,8 @@ plot_percent(wvs_data %>% filter(lowIncome_1), "gTrust", coordflippin = T) +
 #   scale_fill_discrete(name="Low Income") + ggtitle("Low Income = 1 \non scale of 10"); remove(general)
 ```
 
-\
-[back to table of contents](#TOC)
-
+```{r, echo=FALSE, eval=FALSE, fig.width=14, fig.height=7}
 ##by continent
-
-```{r, echo=FALSE, fig.width=14, fig.height=7}
 ggplot(wvs_data %>% filter(!is.na(continent), !is.na(gTrust)), 
        aes(x=gTrust, fill = gTrust)) + geom_bar(stat="bin") + 
 #   geom_bar(stat="bin", colour = "black", fill = "#F0E442") + 
@@ -112,6 +108,12 @@ ggplot(wvs_data %>% filter(!is.na(continent), !is.na(gTrust)),
 [back to table of contents](#TOC)
 
 #community trust 
+
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "nTrust", coordflippin = T)
+```
+
 community trust **does not vary across income**. nearly identical proportional distribution: 
 ```{r, echo=FALSE, fig.width=14, fig.height=7}
 # ggplot(wvs_data %>% filter(!is.na(nTrust)), 
@@ -130,28 +132,183 @@ community trust **does not vary across income**. nearly identical proportional d
 #     scale_x_continuous(breaks=seq(0, 10, 1)) +
 #     ggtitle("Community Trust by Income")
 
-ggplot(wvs_data %>% filter(!is.na(nTrust)), aes(x=income, fill=nTrust)) +
-    geom_histogram(binwidth=.5, position="dodge") + 
-    scale_x_continuous(breaks=seq(0, 10, 1))
-```
+# ggplot(wvs_data %>% filter(!is.na(nTrust)), aes(x=income, fill=nTrust)) +
+#     geom_histogram(binwidth=.5, position="dodge") + 
+#     scale_x_continuous(breaks=seq(0, 10, 1))
 
+income2 <- wvs_data %>% filter(!is.na(nTrust)) %>% group_by(income, nTrust) %>% 
+            summarize(number = n()) %>% group_by(income) %>% 
+            mutate(total = sum(number), percent = round(100*number/total, digits = 0))
+
+ggplot(income2, aes(x=income, y=percent, fill=nTrust)) +
+    geom_histogram(binwidth=.5, alpha=.5, stat="identity") + 
+    scale_x_continuous(breaks=seq(0, 10, 1)) 
+```
 \
 [back to table of contents](#TOC)
 
 
-#generalized trust with 5 factors
+#generalized trust vis-a-vis 5 factors
 
+##happiness
+
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "happy", coordflippin = T)
+```
+
+```{r, echo=FALSE}
+# happy <- wvs_data %>% filter(!is.na(gTrust), !is.na(happy))
+happy <- wvs_data %>% filter(!is.na(gTrust), !is.na(happy)) %>%
+          mutate(happy = ifelse(happy %in% c("Very happy", "Rather happy"), T, F))
+happy_glm <- glm(gTrust~happy, data = happy, family = binomial)
+```
+####glm(gTrust ~ happy)
+```{r, results='asis', echo=FALSE}
+stargazer(happy_glm, type="html") #summary(happy_glm)
+# exp(coef(happy_glm)) #odds ratios
+```
+
+####probabilities
+```{r, echo=FALSE}
+exp(coef(happy_glm))/(1 + exp(coef(happy_glm))) #probabilities
+paste0("Most people can be trusted = 0,", " Need to be very careful = 1" )
+```
+**takeaway**: someone who is happy has a 37.5% likelihood of having low generalized trust
+\
+[back to table of contents](#TOC)
+
+
+##health
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "health", coordflippin = T)
+```
+
+```{r, echo=FALSE}
+health <- wvs_data %>% filter(!is.na(gTrust), !is.na(health), health != "No answer")
+# health <- wvs_data %>% filter(!is.na(gTrust), !is.na(health)) %>%
+#           mutate(health = ifelse(health %in% c("Very happy", "Rather happy"), T, F))
+health_glm <- glm(gTrust~health, data = health, family = binomial)
+```
+####glm(gTrust ~ happy)
+```{r, results='asis', echo=FALSE}
+stargazer(health_glm, type="html") #summary(health_glm)
+# exp(coef(health_glm)) #odds ratios
+```
+
+####probabilities
+```{r, echo=FALSE}
+exp(coef(health_glm))/(1 + exp(coef(health_glm))) #probabilities
+paste0("Most people can be trusted = 0,", " Need to be very careful = 1" )
+```
+**takeaway**: poorer the health, higher probability of having low generalized trust.
+\
+[back to table of contents](#TOC)
+
+##life 
+
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "life", coordflippin = T)
+```
+
+```{r, echo=FALSE}
+life <- wvs_data %>% filter(!is.na(gTrust), !is.na(life))
+# health <- wvs_data %>% filter(!is.na(gTrust), !is.na(health)) %>%
+#           mutate(health = ifelse(health %in% c("Very happy", "Rather happy"), T, F))
+life_glm <- glm(gTrust~life, data = life, family = binomial)
+```
+####glm(gTrust ~ happy)
+```{r, results='asis', echo=FALSE}
+stargazer(life_glm, type="html") #summary(life_glm)
+# exp(coef(life_glm)) #odds ratios
+```
+
+####probabilities
+```{r, echo=FALSE}
+exp(coef(life_glm))/(1 + exp(coef(life_glm))) #probabilities
+paste0("Most people can be trusted = 0,", " Need to be very careful = 1" )
+```
+**takeaway**: lower than 6 on scale of life satisfaction comes with higher probability of having low generalized trust.
+\
+[back to table of contents](#TOC)
+
+##finance
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "finance", coordflippin = T)
+```
+
+```{r, echo=FALSE}
+finance <- wvs_data %>% filter(!is.na(gTrust), !is.na(finance))
+# health <- wvs_data %>% filter(!is.na(gTrust), !is.na(health)) %>%
+#           mutate(health = ifelse(health %in% c("Very happy", "Rather happy"), T, F))
+finance_glm <- glm(gTrust~finance, data = finance, family = binomial)
+```
+####glm(gTrust ~ happy)
+```{r, results='asis', echo=FALSE}
+stargazer(finance_glm, type="html") #summary(finance_glm)
+# exp(coef(life_glm)) #odds ratios
+```
+
+####probabilities
+```{r, echo=FALSE}
+exp(coef(finance_glm))/(1 + exp(coef(finance_glm))) #probabilities
+paste0("Most people can be trusted = 0,", " Need to be very careful = 1" )
+```
+**takeaway**: lower than 7 on scale of satisfaction with financial situation comes with higher probability of having low generalized trust.
+\
+[back to table of contents](#TOC)
+
+##edu
+overall distribution is as follows: 
+```{r, echo=FALSE, fig.width=12, fig.height=3}
+plot_percent(wvs_data, "edu", coordflippin = T)
+```
+
+```{r, echo=FALSE}
+edu <- wvs_data %>% filter(!is.na(gTrust), !is.na(edu))
+# health <- wvs_data %>% filter(!is.na(gTrust), !is.na(health)) %>%
+#           mutate(health = ifelse(health %in% c("Very happy", "Rather happy"), T, F))
+edu_glm <- glm(gTrust~edu, data = edu, family = binomial)
+```
+####glm(gTrust ~ happy)
+```{r, results='asis', echo=FALSE}
+stargazer(edu_glm, type="html") #summary(edu_glm)
+# exp(coef(edu_glm)) #odds ratios
+```
+
+####probabilities
+```{r, echo=FALSE}
+exp(coef(edu_glm))/(1 + exp(coef(edu_glm))) #probabilities
+paste0("Most people can be trusted = 0,", " Need to be very careful = 1" )
+```
+**takeaway**: less education comes with higher probability of having low generalized trust.
+\
+[back to table of contents](#TOC)
+
+
+#generalized trust + community trust vis-a-vis 5 factors
+
+##happiness
 ```{r, eval=FALSE, echo=FALSE}
+#interactions with cTrust
+happy3 <- wvs_data %>% filter(!is.na(gTrust), !is.na(happy), !is.na(nTrust)) %>%
+            mutate(happy = ifelse(happy %in% c("Very happy", "Rather happy"), T, F),
+                   nTrust = ifelse(nTrust %in% c("Trust completely", "Trust somewhat"), T, F))
+
+happy_glm3 <- glm(gTrust~happy+nTrust+(nTrust*happy), data = happy3, family = binomial)
+summary(happy_glm3)
+exp(coef(happy_glm3)) #odds ratios
+exp(coef(happy_glm3))/(1 + exp(coef(happy_glm3))) #probabilities
 
 ```
 
-#generalized trust + community trust with 5 factors
-Show general trust and community trust across 5 factors.... 
-```{r, eval=FALSE, echo=FALSE}
-ggplot(data=wvs_data, 
-      aes(x=factor(health), y=gTrust, group=income, colour=income)) +
-      geom_line() + geom_point()
-```
+##health
 
-•	
+##life 
 
+##finance
+
+##edu

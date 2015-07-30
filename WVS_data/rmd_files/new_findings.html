@@ -10,7 +10,7 @@
 
 
 
-<title>WVS: correlational data</title>
+<title>WVS: archival data</title>
 
 <script src="new_findings_files/jquery-1.11.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,20 +62,30 @@ img {
 
 
 <div id="header">
-<h1 class="title">WVS: correlational data</h1>
-<h4 class="date"><em>Updated 28 July, 2015</em></h4>
+<h1 class="title">WVS: archival data</h1>
+<h4 class="date"><em>Updated 30 July, 2015</em></h4>
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#generalized-trust">generalized trust</a><ul>
 <li><a href="#by-income">by income</a></li>
-<li><a href="#by-varying-definitions-of-income">by varying definitions of income</a></li>
-<li><a href="#by-continent">by continent</a></li>
 </ul></li>
 <li><a href="#community-trust">community trust</a></li>
-<li><a href="#generalized-trust-with-5-factors">generalized trust with 5 factors</a></li>
-<li><a href="#generalized-trust-community-trust-with-5-factors">generalized trust + community trust with 5 factors</a></li>
+<li><a href="#generalized-trust-vis-a-vis-5-factors">generalized trust vis-a-vis 5 factors</a><ul>
+<li><a href="#happiness">happiness</a></li>
+<li><a href="#health">health</a></li>
+<li><a href="#life">life</a></li>
+<li><a href="#finance">finance</a></li>
+<li><a href="#edu">edu</a></li>
+</ul></li>
+<li><a href="#generalized-trust-community-trust-vis-a-vis-5-factors">generalized trust + community trust vis-a-vis 5 factors</a><ul>
+<li><a href="#happiness-1">happiness</a></li>
+<li><a href="#health-1">health</a></li>
+<li><a href="#life-1">life</a></li>
+<li><a href="#finance-1">finance</a></li>
+<li><a href="#edu-1">edu</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -84,40 +94,1250 @@ img {
 <p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-2-1.png" title="" alt="" width="1152" /></p>
 <div id="by-income" class="section level2">
 <h2>by income</h2>
-<p><img src="new_findings_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" width="1056" /></p>
-<p><br />
-<a href="#TOC">back to table of contents</a></p>
-</div>
-<div id="by-varying-definitions-of-income" class="section level2">
-<h2>by varying definitions of income</h2>
-<p><strong>less and less trust</strong> relatively when changing income definition:</p>
-<p><img src="new_findings_files/figure-html/unnamed-chunk-4-1.png" title="" alt="" width="1152" /></p>
-<p><img src="new_findings_files/figure-html/unnamed-chunk-5-1.png" title="" alt="" width="1152" /></p>
-<p><img src="new_findings_files/figure-html/unnamed-chunk-6-1.png" title="" alt="" width="1152" /></p>
-<p><img src="new_findings_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" width="1152" /></p>
-<p><br />
-<a href="#TOC">back to table of contents</a></p>
-</div>
-<div id="by-continent" class="section level2">
-<h2>by continent</h2>
-<p><img src="new_findings_files/figure-html/unnamed-chunk-9-1.png" title="" alt="" width="1344" /></p>
+<p><img src="new_findings_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" width="864" /></p>
 <p><br />
 <a href="#TOC">back to table of contents</a></p>
 </div>
 </div>
 <div id="community-trust" class="section level1">
 <h1>community trust</h1>
-<p>community trust <strong>does not vary across income</strong>. nearly identical proportional distribution: <img src="new_findings_files/figure-html/unnamed-chunk-10-1.png" title="" alt="" width="1344" /></p>
-<p><br />
+<p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" width="1152" /></p>
+<p>community trust <strong>does not vary across income</strong>. nearly identical proportional distribution: <img src="new_findings_files/figure-html/unnamed-chunk-8-1.png" title="" alt="" width="1344" /><br />
 <a href="#TOC">back to table of contents</a></p>
 </div>
-<div id="generalized-trust-with-5-factors" class="section level1">
-<h1>generalized trust with 5 factors</h1>
+<div id="generalized-trust-vis-a-vis-5-factors" class="section level1">
+<h1>generalized trust vis-a-vis 5 factors</h1>
+<div id="happiness" class="section level2">
+<h2>happiness</h2>
+<p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-9-1.png" title="" alt="" width="1152" /></p>
+<div id="glmgtrust-happy" class="section level4">
+<h4>glm(gTrust ~ happy)</h4>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+gTrust
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+happy
+</td>
+<td>
+-0.507<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.014)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1.421<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.013)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+193,363
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-111,918.700
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+223,841.300
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
 </div>
-<div id="generalized-trust-community-trust-with-5-factors" class="section level1">
-<h1>generalized trust + community trust with 5 factors</h1>
-<p>Show general trust and community trust across 5 factors….</p>
-<p>•</p>
+<div id="probabilities" class="section level4">
+<h4>probabilities</h4>
+<pre><code>## (Intercept)   happyTRUE 
+##   0.8055387   0.3759077</code></pre>
+<pre><code>## [1] &quot;Most people can be trusted = 0, Need to be very careful = 1&quot;</code></pre>
+<p><strong>takeaway</strong>: someone who is happy has a 37.5% likelihood of having low generalized trust<br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+<div id="health" class="section level2">
+<h2>health</h2>
+<p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-13-1.png" title="" alt="" width="1152" /></p>
+<div id="glmgtrust-happy-1" class="section level4">
+<h4>glm(gTrust ~ happy)</h4>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+gTrust
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+healthGood
+</td>
+<td>
+0.145<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.013)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+healthFair
+</td>
+<td>
+0.378<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.015)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+healthPoor
+</td>
+<td>
+0.497<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.024)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+healthVery poor
+</td>
+<td>
+0.460<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.131)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+0.810<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.010)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+193,659
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-112,188.500
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+224,387.000
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<div id="probabilities-1" class="section level4">
+<h4>probabilities</h4>
+<pre><code>##     (Intercept)      healthGood      healthFair      healthPoor 
+##       0.6921222       0.5362258       0.5934561       0.6218622 
+## healthVery poor 
+##       0.6129432</code></pre>
+<pre><code>## [1] &quot;Most people can be trusted = 0, Need to be very careful = 1&quot;</code></pre>
+<p><strong>takeaway</strong>: poorer the health, higher probability of having low generalized trust.<br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+<div id="life" class="section level2">
+<h2>life</h2>
+<p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-17-1.png" title="" alt="" width="1152" /></p>
+<div id="glmgtrust-happy-2" class="section level4">
+<h4>glm(gTrust ~ happy)</h4>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+gTrust
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life2
+</td>
+<td>
+-0.231<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.051)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life3
+</td>
+<td>
+-0.207<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.043)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life4
+</td>
+<td>
+-0.350<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.041)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life5
+</td>
+<td>
+-0.328<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.037)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life6
+</td>
+<td>
+-0.539<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.037)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life7
+</td>
+<td>
+-0.724<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.036)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life8
+</td>
+<td>
+-0.939<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.035)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life9
+</td>
+<td>
+-1.006<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.037)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+lifeCompletely satisfied
+</td>
+<td>
+-0.594<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.037)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1.645<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.033)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+194,429
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-111,773.700
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+223,567.500
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<div id="probabilities-2" class="section level4">
+<h4>probabilities</h4>
+<pre><code>##              (Intercept)                    life2                    life3 
+##                0.8381503                0.4425536                0.4484541 
+##                    life4                    life5                    life6 
+##                0.4132975                0.4186733                0.3683063 
+##                    life7                    life8                    life9 
+##                0.3265110                0.2810547                0.2678220 
+## lifeCompletely satisfied 
+##                0.3557768</code></pre>
+<pre><code>## [1] &quot;Most people can be trusted = 0, Need to be very careful = 1&quot;</code></pre>
+<p><strong>takeaway</strong>: lower than 6 on scale of life satisfaction comes with higher probability of having low generalized trust.<br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+<div id="finance" class="section level2">
+<h2>finance</h2>
+<p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-21-1.png" title="" alt="" width="1152" /></p>
+<div id="glmgtrust-happy-3" class="section level4">
+<h4>glm(gTrust ~ happy)</h4>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+gTrust
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance2
+</td>
+<td>
+-0.219<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.035)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance3
+</td>
+<td>
+-0.313<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.030)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance4
+</td>
+<td>
+-0.447<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.029)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance5
+</td>
+<td>
+-0.418<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance6
+</td>
+<td>
+-0.590<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance7
+</td>
+<td>
+-0.776<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance8
+</td>
+<td>
+-0.907<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+finance9
+</td>
+<td>
+-1.021<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.030)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+financeCompletely satisfied
+</td>
+<td>
+-0.731<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.029)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1.585<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.022)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+191,447
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-110,399.400
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+220,818.700
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<div id="probabilities-3" class="section level4">
+<h4>probabilities</h4>
+<pre><code>##                 (Intercept)                    finance2 
+##                   0.8299320                   0.4455615 
+##                    finance3                    finance4 
+##                   0.4223042                   0.3900426 
+##                    finance5                    finance6 
+##                   0.3969581                   0.3567213 
+##                    finance7                    finance8 
+##                   0.3151120                   0.2876957 
+##                    finance9 financeCompletely satisfied 
+##                   0.2648315                   0.3250625</code></pre>
+<pre><code>## [1] &quot;Most people can be trusted = 0, Need to be very careful = 1&quot;</code></pre>
+<p><strong>takeaway</strong>: lower than 7 on scale of satisfaction with financial situation comes with higher probability of having low generalized trust.<br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+<div id="edu" class="section level2">
+<h2>edu</h2>
+<p>overall distribution is as follows: <img src="new_findings_files/figure-html/unnamed-chunk-25-1.png" title="" alt="" width="1152" /></p>
+<div id="glmgtrust-happy-4" class="section level4">
+<h4>glm(gTrust ~ happy)</h4>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+gTrust
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduIncomplete primary school
+</td>
+<td>
+0.246<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.033)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduComplete primary school
+</td>
+<td>
+0.067<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.028)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduIncomplete secondary school: technical/ vocational type
+</td>
+<td>
+0.095<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.032)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduComplete secondary school: technical/ vocational type
+</td>
+<td>
+-0.031
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduIncomplete secondary school: university-preparatory type
+</td>
+<td>
+-0.116<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.030)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduComplete secondary school: university-preparatory type
+</td>
+<td>
+-0.171<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduSome university-level education, without degree
+</td>
+<td>
+-0.378<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.030)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+eduUniversity - level education, with degree
+</td>
+<td>
+-0.558<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.026)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1.183<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.023)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+179,985
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-102,569.200
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+205,156.500
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<div id="probabilities-4" class="section level4">
+<h4>probabilities</h4>
+<pre><code>##                                                 (Intercept) 
+##                                                   0.7654042 
+##                                eduIncomplete primary school 
+##                                                   0.5612789 
+##                                  eduComplete primary school 
+##                                                   0.5167365 
+##  eduIncomplete secondary school: technical/ vocational type 
+##                                                   0.5236583 
+##    eduComplete secondary school: technical/ vocational type 
+##                                                   0.4921888 
+## eduIncomplete secondary school: university-preparatory type 
+##                                                   0.4710654 
+##   eduComplete secondary school: university-preparatory type 
+##                                                   0.4572589 
+##          eduSome university-level education, without degree 
+##                                                   0.4066013 
+##                eduUniversity - level education, with degree 
+##                                                   0.3640989</code></pre>
+<pre><code>## [1] &quot;Most people can be trusted = 0, Need to be very careful = 1&quot;</code></pre>
+<p><strong>takeaway</strong>: less education comes with higher probability of having low generalized trust.<br />
+<a href="#TOC">back to table of contents</a></p>
+</div>
+</div>
+</div>
+<div id="generalized-trust-community-trust-vis-a-vis-5-factors" class="section level1">
+<h1>generalized trust + community trust vis-a-vis 5 factors</h1>
+<div id="happiness-1" class="section level2">
+<h2>happiness</h2>
+</div>
+<div id="health-1" class="section level2">
+<h2>health</h2>
+</div>
+<div id="life-1" class="section level2">
+<h2>life</h2>
+</div>
+<div id="finance-1" class="section level2">
+<h2>finance</h2>
+</div>
+<div id="edu-1" class="section level2">
+<h2>edu</h2>
+</div>
 </div>
 
 
